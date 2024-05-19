@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./assets/style.css" rel="stylesheet" />
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <img id="logo"src="./assets/rophie-logo.png" alt="Rophie location">
+
+
+        <section id="stakeholders_container">
+            <div>
+                <!--Données Bailleurs en place-->
+                <button class="button full-width-button" type="button">Modifier les données bailleurs </button>
+                <table class="stakeholder" id="owners">
+                    <thead>
+                        <tr>
+                            <th>Bailleurs</th>
+                        </tr>
+                    </thead>
+                    <tr><td>Jean-Pierre Trucmuche & Marie Machine</td></tr>
+                    <tr><td>21 Rue Delarue</td></tr>
+                    <tr><td>25400 Laville</td></tr>
+                </table> 
+
+                <!--Formulaire pour modifier les données Bailleurs-->
+                <form class="stakeholder_form hidden" action="">
+                    <div class="input-container">
+                        <label for="owner-name">Nom des bailleurs</label>
+                        <input id="owner-name" type="text" placeholder="Jean-Pierre Trucmuche & Marie Machine">
+                    </div>
+                    <div class="input-container">
+                        <label for="owner-adress_street">N° et libellé de la voie</label>
+                        <input id="owner-adress_street" type="text" placeholder="21 Rue Delarue">
+                    </div>
+                    <div class="input-container">
+                        <label for="owner-adress_postal-code">Code postal et ville</label>
+                        <input id="owner-adress_postal-code" type="text" placeholder="25400 Laville">
+                    </div>
+                    <div class="input-container submit_changes">
+                        <input class="button" type="submit" value="Enregistrer les modifications">
+                    </div>
+                </form>
+            </div>
+            <div>
+                <!--Données Locataires en place-->
+                <button class="button full-width-button" type="button">Modifier les données locataires</button>
+                <table id="tenants" class="stakeholder">
+                    <thead>
+                        <tr>
+                            <th>Locataires</th>
+                        </tr>
+                    </thead>
+                    <tr><td>Jean Dupont & Jeanne Dubois</td></tr>
+                    <tr><td>5 bis Avenue Delavenue</td></tr>
+                    <tr><td>32500 LeBourg</td></tr>
+                </table> 
+                <!--Formulaire pour modifier les données Lailleurs-->
+                <form class="stakeholder_form hidden" action="">
+                    <div class="input-container">
+                        <label for="tenant-name">Nom des locataires</label>
+                        <input id="tenant-name" type="text" placeholder="Jean Dupont & Jeanne Dubois">
+                    </div>
+                    <div class="input-container">
+                        <label for="tenant-adress_street">N° et libellé de la voie</label>
+                        <input id="tenant-adress_street" type="text" placeholder="5 bis Avenue Delavenue">
+                    </div>
+                    <div class="input-container">
+                        <label for="tenant-adress_postal-code">Code postal et ville</label>
+                        <input id="tenant-adress_postal-code" type="text" placeholder="32500 LeBourg">
+                    </div>
+                    <div class="input-container submit_changes">
+                        <input class="button" type="submit" value="Enregistrer les modifications">
+                    </div>
+                </form>
+            </div>
+        </section>
+    </header>
+    <main>
+
+        <h1>Avis d'échéance</h1>
+        <!--La date donnée-->
+        <button class="button" type="button">Modifier manuellement la date</button>
+        <h2>Loyer de juin 2024</h2>
+
+        <!--Modification de la date-->
+        <form action="" class="hidden">
+            <label for="date">Loyer de :</label>
+            <input class="button" type="date">
+        </form>
+
+
+        <p>Avis n° 3</p>
+        <p>Pour la période du <span class="highlight">01/06/2024</span> au <span class="highlight">30/06/2024</span></p>
+        <table id="values-table">
+            <thead>
+                <tr>
+                    <th scope="col">Libellé</th>
+                    <th scope="col">Montant</th>
+                </tr>
+            </thead>
+                <tr>
+                    <th scope="row">Loyer mensuel contractuel :</th>
+                    <td>
+                        <div>1000 € </div>
+                        <button class="button" type="button">Modifier le montant</button>
+                        <form action="" class="hidden">
+                            <input class="button" type="number" placeholder="1000">
+                            <input class="button" type="submit" value="Enregistrer les modifications">
+                        </form>
+                    </td>
+                </tr>
+                <tr>                    
+                    <th scope="row">Charges mensuelles contractuelles :</th>
+                    <td>
+                        <div>5 €</div>
+                        <button class="button" type="button">Modifier le montant</button>
+                        <form action="" class="hidden">
+                            <input class="button" type="number" placeholder="5">
+                            <input class="button" type="submit" value="Enregistrer les modifications">
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Montant total dû :</th>
+                    <td><span class="highlight">1005 €</span></td>
+                </tr>
+
+        </table>
+    
+    </main>
+    <footer>
+
+    </footer>
+</body>
+</html>

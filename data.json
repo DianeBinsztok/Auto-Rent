@@ -1,0 +1,21 @@
+{
+    "id":1,
+    "month":6,
+    "year":2024,
+    "stakeholders":{
+        "owners":{
+            "names":"Jean-Pierre Trucmuche & Marie Machine",
+            "street number and name":"21 Rue Delarue",
+            "postal code and city":"25400 Laville"
+        },
+        "tenants":{
+            "names":"Jean Dupont & Jeanne Dubois",
+            "street number and name":"5 bis Avenue Delavenue",
+            "postal code and city":"32500 LeBourg"
+        }
+    },
+    "rent":{
+        "base":1000,
+        "additionnal charges":5
+    }
+}
