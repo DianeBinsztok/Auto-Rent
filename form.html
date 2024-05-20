@@ -12,20 +12,21 @@
 
 
         <section id="stakeholders_container">
-            <div>
+            <div class="editable-data_container">
                 <!--Données Bailleurs en place-->
-                <button class="button full-width-button" type="button">Modifier les données bailleurs </button>
-                <table class="stakeholder" id="owners">
-                    <thead>
-                        <tr>
-                            <th>Bailleurs</th>
-                        </tr>
-                    </thead>
-                    <tr><td>Jean-Pierre Trucmuche & Marie Machine</td></tr>
-                    <tr><td>21 Rue Delarue</td></tr>
-                    <tr><td>25400 Laville</td></tr>
-                </table> 
-
+                <div class="editable-data">
+                    <button class="button full-width-button display_form" type="button">Modifier les données bailleurs </button>
+                    <table class="stakeholder" id="owners">
+                        <thead>
+                            <tr>
+                                <th>Bailleurs</th>
+                            </tr>
+                        </thead>
+                        <tr><td>Jean-Pierre Trucmuche & Marie Machine</td></tr>
+                        <tr><td>21 Rue Delarue</td></tr>
+                        <tr><td>25400 Laville</td></tr>
+                    </table>
+                </div> 
                 <!--Formulaire pour modifier les données Bailleurs-->
                 <form class="stakeholder_form hidden" action="">
                     <div class="input-container">
@@ -41,24 +42,28 @@
                         <input id="owner-adress_postal-code" type="text" placeholder="25400 Laville">
                     </div>
                     <div class="input-container submit_changes">
+
+                        <!--Enregistrer les modifications-->
                         <input class="button" type="submit" value="Enregistrer les modifications">
                     </div>
                 </form>
             </div>
-            <div>
-                <!--Données Locataires en place-->
-                <button class="button full-width-button" type="button">Modifier les données locataires</button>
-                <table id="tenants" class="stakeholder">
-                    <thead>
-                        <tr>
-                            <th>Locataires</th>
-                        </tr>
-                    </thead>
-                    <tr><td>Jean Dupont & Jeanne Dubois</td></tr>
-                    <tr><td>5 bis Avenue Delavenue</td></tr>
-                    <tr><td>32500 LeBourg</td></tr>
-                </table> 
-                <!--Formulaire pour modifier les données Lailleurs-->
+            <div class="editable-data_container">
+                <div class="editable-data">
+                    <!--Données Locataires en place-->
+                    <button class="button full-width-button display_form" type="button">Modifier les données locataires</button>
+                    <table id="tenants" class="stakeholder">
+                        <thead>
+                            <tr>
+                                <th>Locataires</th>
+                            </tr>
+                        </thead>
+                        <tr><td>Jean Dupont & Jeanne Dubois</td></tr>
+                        <tr><td>5 bis Avenue Delavenue</td></tr>
+                        <tr><td>32500 LeBourg</td></tr>
+                    </table> 
+                </div>
+                <!--Formulaire pour modifier les données Bailleurs-->
                 <form class="stakeholder_form hidden" action="">
                     <div class="input-container">
                         <label for="tenant-name">Nom des locataires</label>
@@ -82,15 +87,20 @@
     <main>
 
         <h1>Avis d'échéance</h1>
-        <!--La date donnée-->
-        <button class="button" type="button">Modifier manuellement la date</button>
-        <h2>Loyer de juin 2024</h2>
-
-        <!--Modification de la date-->
-        <form action="" class="hidden">
-            <label for="date">Loyer de :</label>
-            <input class="button" type="date">
-        </form>
+        <div class="editable-data_container">
+            <!--La date donnée-->
+            <div class="editable-data">
+                <button class="button display_form" type="button">Modifier manuellement la date</button>
+                <h2>Loyer de juin 2024</h2>
+            </div>
+            <!--Modification de la date-->
+            <form action="" class="hidden">
+                <label for="date">Loyer de :</label>
+                <input class="button" type="date">
+                <input class="button" type="submit" value="Enregistrer les modifications">
+            </form>
+        </div>
+        
 
 
         <p>Avis n° 3</p>
@@ -104,9 +114,10 @@
             </thead>
                 <tr>
                     <th scope="row">Loyer mensuel contractuel :</th>
-                    <td>
-                        <div>1000 € </div>
-                        <button class="button" type="button">Modifier le montant</button>
+                    <td class="editable-data_container">
+                        <div class="editable-data">1000 € 
+                            <button class="button display_form" type="button">Modifier le montant</button>
+                        </div>
                         <form action="" class="hidden">
                             <input class="button" type="number" placeholder="1000">
                             <input class="button" type="submit" value="Enregistrer les modifications">
@@ -115,9 +126,10 @@
                 </tr>
                 <tr>                    
                     <th scope="row">Charges mensuelles contractuelles :</th>
-                    <td>
-                        <div>5 €</div>
-                        <button class="button" type="button">Modifier le montant</button>
+                    <td class="editable-data_container">
+                        <div class="editable-data">5 €
+                            <button class="button display_form" type="button">Modifier le montant</button>
+                        </div>
                         <form action="" class="hidden">
                             <input class="button" type="number" placeholder="5">
                             <input class="button" type="submit" value="Enregistrer les modifications">
@@ -126,14 +138,14 @@
                 </tr>
                 <tr>
                     <th scope="row">Montant total dû :</th>
-                    <td><span class="highlight">1005 €</span></td>
+                    <td><span class="highlight" id="sum">1005 €</span></td>
                 </tr>
 
         </table>
     
     </main>
     <footer>
-
+        <script src="./forms-script.js"></script>
     </footer>
 </body>
 </html>
