@@ -1,4 +1,7 @@
 <?php
+// LES FONCTIONS DE DATE
+require "./handle-dates.php";
+
 //Le JSON
 $jsonData = json_decode(file_get_contents("./data.json"), true);
 
@@ -44,7 +47,15 @@ if ($_POST["tenants_city"]) {
     $tenants_city = $jsonData["tenants"]["city"];
 }
 //Date
-$date = "Juin 2024";
+if ($_POST["date"]) {
+    $date = $_POST["date"];
+} else {
+    $date = getMonthAndYear();
+}
+
+$firstDateOfMonth = getMonthInterval()[0];
+$lastDateOfMonth = getMonthInterval()[1];
+
 
 //Rent
 $base_rent;
@@ -215,7 +226,15 @@ $total_rent = intval($base_rent, 10) + intval($charges, 10);
 
 
         <p>Avis n° 3</p>
-        <p>Pour la période du <span class="highlight">01/06/2024</span> au <span class="highlight">30/06/2024</span></p>
+        <p>Pour la période du <span class="highlight">
+                <?php if ($firstDateOfMonth) {
+                    echo ($firstDateOfMonth);
+                } ?>
+            </span> au <span class="highlight">
+                <?php if ($lastDateOfMonth) {
+                    echo ($lastDateOfMonth);
+                } ?>
+            </span></p>
         <table id="values-table">
             <thead>
                 <tr>
@@ -240,7 +259,7 @@ $total_rent = intval($base_rent, 10) + intval($charges, 10);
                 </td>
             </tr>
             <tr>
-                <th scope="row">Charges mensuelles contractuelles :</th>
+                <th scope="row">Charges locatives mensuelles contractuelles :</th>
                 <td class="editable-data_container">
                     <div class="editable-data">
                         <?php if ($charges) {
