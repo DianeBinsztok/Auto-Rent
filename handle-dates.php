@@ -2,9 +2,8 @@
 /* Les existe des méthodes pour traduire le mois en français mais rien de ce que j'ai testé ne fonctionne et la doc m'a donné des anévrismes */
 function getMonthAndYear()
 {
-    $comingMonth = date('F', strtotime('+1 month'));
     $year = date('Y', strtotime('+1 month'));
-    return (toFrench($comingMonth) . " " . $year);
+    return (toFrench(getNextMonth()) . " " . $year);
 }
 function getNextMonth()
 {
