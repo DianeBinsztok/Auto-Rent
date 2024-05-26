@@ -46,15 +46,13 @@ if ($_POST["tenants_city"]) {
 } else {
     $tenants_city = $jsonData["tenants"]["city"];
 }
-//Date
-if ($_POST["date"]) {
-    $date = $_POST["date"];
-} else {
-    $date = getMonthAndYear();
-}
-
+//Dates
+$date = getMonthAndYear();
 $firstDateOfMonth = getMonthInterval()[0];
 $lastDateOfMonth = getMonthInterval()[1];
+
+
+
 
 
 //Rent

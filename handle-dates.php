@@ -1,20 +1,29 @@
 <?php
-/* Les existe des méthodes pour traduire le mois en français mais rien de ce que j'ai testé ne fonctionne et la doc m'a donné des anévrismes */
 function getMonthAndYear()
 {
-    $year = date('Y', strtotime('+1 month'));
-    return (toFrench(getNextMonth()) . " " . $year);
+    if ($_POST["date"]) {
+        $dateString = date('F Y', strtotime($_POST["date"]));
+        $dateArray = explode(" ", $dateString);
+        return toFrench($dateArray[0]) . " " . $dateArray[1];
+    } else {
+        $dateString = date('F Y', strtotime('+1 month'));
+        $dateArray = explode(" ", $dateString);
+        return toFrench($dateArray[0]) . " " . $dateArray[1];
+    }
 }
-function getNextMonth()
-{
-    return date('F', strtotime('+1 month'));
-}
+
 function getMonthInterval()
 {
-    // https://stackoverflow.com/questions/2094797/the-first-day-of-the-current-month-in-php-using-date-modify-as-datetime-object
-    $firstDay = date('01/m/Y', strtotime(getNextMonth()));
-    $lastDay = date('t/m/Y', strtotime(getNextMonth()));
-    return [$firstDay, $lastDay];
+    if ($_POST["date"]) {
+        $firstDay = date('01/m/Y', strtotime($_POST["date"]));
+        $lastDay = date('t/m/Y', strtotime($_POST["date"]));
+        return [$firstDay, $lastDay];
+    } else {
+        $firstDay = date('01/m/Y', strtotime('+1 month'));
+        $lastDay = date('t/m/Y', strtotime('+1 month'));
+        return [$firstDay, $lastDay];
+    }
+
 }
 function toFrench($string)
 {
