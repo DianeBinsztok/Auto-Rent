@@ -25,42 +25,43 @@ function getMonthInterval()
     }
 
 }
+/* Correction du hiatus en français : la fonction doit aussi gérer la particule 'de' ou 'd' en fonction du mois */
 function toFrench($string)
 {
-    if ($string == 'January') {
-        return 'janvier';
+    if ($string == "January") {
+        return "de janvier";
     }
-    if ($string == 'February') {
-        return 'février';
+    if ($string == "February") {
+        return "de février";
     }
-    if ($string == 'March') {
-        return 'mars';
+    if ($string == "March") {
+        return "de mars";
     }
-    if ($string == 'April') {
-        return 'avril';
+    if ($string == "April") {
+        return "d'avril";
     }
     if ($string == 'May') {
-        return 'mai';
+        return "de mai";
     }
-    if ($string == 'June') {
-        return 'juin';
+    if ($string == "June") {
+        return "de juin";
     }
-    if ($string == 'July') {
-        return 'juillet';
+    if ($string == "July") {
+        return "de juillet";
     }
-    if ($string == 'August') {
-        return 'août';
+    if ($string == "August") {
+        return "d'août";
     }
-    if ($string == 'September') {
-        return 'septembre';
+    if ($string == "September") {
+        return "de septembre";
     }
-    if ($string == 'October') {
-        return 'octobre';
+    if ($string == "October") {
+        return "d'octobre";
     }
-    if ($string == 'November') {
-        return 'novembre';
+    if ($string == "November") {
+        return "de novembre";
     }
-    if ($string == 'December') {
-        return 'décembre';
+    if ($string == "December") {
+        return "de décembre";
     }
 }

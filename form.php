@@ -207,7 +207,7 @@ $total_rent = intval($base_rent, 10) + intval($charges, 10);
             <!--La date donnée-->
             <div class="editable-data">
                 <button class="button display_form" type="button">Modifier manuellement la date</button>
-                <h2>Loyer de
+                <h2>Loyer
                     <?php if ($date) {
                         echo ($date);
                     } ?>
