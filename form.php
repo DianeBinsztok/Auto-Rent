@@ -233,52 +233,56 @@ $total_rent = intval($base_rent, 10) + intval($charges, 10);
                     echo ($lastDateOfMonth);
                 } ?>
             </span></p>
-        <table id="values-table">
-            <thead>
-                <tr>
-                    <th scope="col">Libellé</th>
-                    <th scope="col">Montant</th>
-                </tr>
-            </thead>
-            <tr>
-                <th scope="row">Loyer mensuel contractuel :</th>
-                <td class="editable-data_container">
-                    <div class="editable-data">
-                        <?php if ($base_rent) {
-                            echo ($base_rent . " €");
-                        } ?>
-                        <button class="button display_form" type="button">Modifier le montant</button>
-                    </div>
-                    <form action="form.php" class="hidden" method="post">
-                        <input class="button" type="number" name="base_rent"
-                            value="<?php echo ($jsonData["rent"]["base"]) ?>">
-                        <input class="button" type="submit" value="Enregistrer les modifications">
-                    </form>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">Charges locatives mensuelles contractuelles :</th>
-                <td class="editable-data_container">
-                    <div class="editable-data">
-                        <?php if ($charges) {
-                            echo ($charges . " €");
-                        } ?>
-                        <button class="button display_form" type="button">Modifier le montant</button>
-                    </div>
-                    <form action="form.php" class="hidden" method="post">
-                        <input class="button" type="number" name="charges" value="<?php echo ($charges) ?>">
-                        <input class="button" type="submit" value="Enregistrer les modifications">
-                    </form>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">Montant total dû :</th>
-                <td><span class="highlight" id="sum">
-                        <?php echo ($total_rent); ?>
-                    </span></td>
-            </tr>
+        <div class="editable-data_container">
+            <div class="editable-data">
+                <table id="values-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Libellé</th>
+                            <th scope="col">Montant</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <th scope="row">Loyer mensuel contractuel :</th>
+                        <td>
 
-        </table>
+                            <?php if ($base_rent) {
+                                echo ($base_rent . " €");
+                            } ?>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Charges locatives mensuelles contractuelles :</th>
+                        <td>
+
+                            <?php if ($charges) {
+                                echo ($charges . " €");
+                            } ?>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Montant total dû :</th>
+                        <td><span class="highlight" id="sum">
+                                <?php echo ($total_rent); ?>
+                            </span></td>
+                    </tr>
+                </table>
+                <button class="button display_form" type="button">Modifier les montants</button>
+            </div>
+
+
+            <form action="form.php" class="hidden" method="post">
+                <label for="base_rent">Modifier le loyer :</label>
+                <input class="button" type="number" name="base_rent" value="<?php echo ($base_rent) ?>">
+                <input class="button" type="submit" value="Enregistrer les modifications">
+                <label for="charges">Modifier les charges :</label>
+                <input class="button" type="number" name="charges" value="<?php echo ($charges) ?>">
+                <input class="button" type="submit" value="Enregistrer les modifications">
+            </form>
+
+        </div>
 
     </main>
     <footer>
