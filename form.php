@@ -1,4 +1,9 @@
 <?php
+//LA BASE DE DONNÉES
+//test
+require "./data.php";
+var_dump($sheets);
+
 // LES FONCTIONS DE DATE
 require "./handle-dates.php";
 
