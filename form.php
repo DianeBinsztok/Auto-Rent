@@ -1,4 +1,9 @@
 <?php
+//LA BASE DE DONNÉES
+//test
+require "./data.php";
+var_dump($sheets);
+
 // LES FONCTIONS DE DATE
 require "./handle-dates.php";
 
@@ -46,15 +51,13 @@ if ($_POST["tenants_city"]) {
 } else {
     $tenants_city = $jsonData["tenants"]["city"];
 }
-//Date
-if ($_POST["date"]) {
-    $date = $_POST["date"];
-} else {
-    $date = getMonthAndYear();
-}
-
+//Dates
+$date = getMonthAndYear();
 $firstDateOfMonth = getMonthInterval()[0];
 $lastDateOfMonth = getMonthInterval()[1];
+
+
+
 
 
 //Rent
@@ -209,7 +212,7 @@ $total_rent = intval($base_rent, 10) + intval($charges, 10);
             <!--La date donnée-->
             <div class="editable-data">
                 <button class="button display_form" type="button">Modifier manuellement la date</button>
-                <h2>Loyer de
+                <h2>Loyer
                     <?php if ($date) {
                         echo ($date);
                     } ?>

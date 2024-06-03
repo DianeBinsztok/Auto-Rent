@@ -1,57 +1,67 @@
 <?php
-/* Les existe des méthodes pour traduire le mois en français mais rien de ce que j'ai testé ne fonctionne et la doc m'a donné des anévrismes */
 function getMonthAndYear()
 {
-    $year = date('Y', strtotime('+1 month'));
-    return (toFrench(getNextMonth()) . " " . $year);
+    if ($_POST["date"]) {
+        $dateString = date('F Y', strtotime($_POST["date"]));
+        $dateArray = explode(" ", $dateString);
+        return toFrench($dateArray[0]) . " " . $dateArray[1];
+    } else {
+        $dateString = date('F Y', strtotime('+1 month'));
+        $dateArray = explode(" ", $dateString);
+        return toFrench($dateArray[0]) . " " . $dateArray[1];
+    }
 }
-function getNextMonth()
-{
-    return date('F', strtotime('+1 month'));
-}
+
 function getMonthInterval()
 {
-    // https://stackoverflow.com/questions/2094797/the-first-day-of-the-current-month-in-php-using-date-modify-as-datetime-object
-    $firstDay = date('01/m/Y', strtotime(getNextMonth()));
-    $lastDay = date('t/m/Y', strtotime(getNextMonth()));
-    return [$firstDay, $lastDay];
+    if ($_POST["date"]) {
+        $firstDay = date('01/m/Y', strtotime($_POST["date"]));
+        $lastDay = date('t/m/Y', strtotime($_POST["date"]));
+        return [$firstDay, $lastDay];
+    } else {
+        $firstDay = date('01/m/Y', strtotime('+1 month'));
+        $lastDay = date('t/m/Y', strtotime('+1 month'));
+        return [$firstDay, $lastDay];
+    }
+
 }
+/* Correction du hiatus en français : la fonction doit aussi gérer la particule 'de' ou 'd' en fonction du mois */
 function toFrench($string)
 {
-    if ($string == 'January') {
-        return 'janvier';
+    if ($string == "January") {
+        return "de janvier";
     }
-    if ($string == 'February') {
-        return 'février';
+    if ($string == "February") {
+        return "de février";
     }
-    if ($string == 'March') {
-        return 'mars';
+    if ($string == "March") {
+        return "de mars";
     }
-    if ($string == 'April') {
-        return 'avril';
+    if ($string == "April") {
+        return "d'avril";
     }
     if ($string == 'May') {
-        return 'mai';
+        return "de mai";
     }
-    if ($string == 'June') {
-        return 'juin';
+    if ($string == "June") {
+        return "de juin";
     }
-    if ($string == 'July') {
-        return 'juillet';
+    if ($string == "July") {
+        return "de juillet";
     }
-    if ($string == 'August') {
-        return 'août';
+    if ($string == "August") {
+        return "d'août";
     }
-    if ($string == 'September') {
-        return 'septembre';
+    if ($string == "September") {
+        return "de septembre";
     }
-    if ($string == 'October') {
-        return 'octobre';
+    if ($string == "October") {
+        return "d'octobre";
     }
-    if ($string == 'November') {
-        return 'novembre';
+    if ($string == "November") {
+        return "de novembre";
     }
-    if ($string == 'December') {
-        return 'décembre';
+    if ($string == "December") {
+        return "de décembre";
     }
 }
