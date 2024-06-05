@@ -6,11 +6,9 @@ try {
     $statement = $database->query(
         "SELECT * FROM `sheets` LIMIT 50"
     );
-    $sheets = $statement->fetchAll();
 
-    foreach ($sheets as $sheet) {
-        var_dump($sheet);
-    }
+    $getAllSheets = $statement->fetchAll();
 } catch (Exception $e) {
+    echo ("Impossible d'accéder aux appels de loyers");
     die('Erreur : ' . $e->getMessage());
 }

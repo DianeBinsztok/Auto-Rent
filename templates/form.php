@@ -1,11 +1,9 @@
 <?php
-//LA BASE DE DONNÉES
-//test
-require "../src/data.php";
-var_dump($sheet);
+// Test: j'ai bien accès aux sheets sur le template
+var_dump($getAllSheets);
 
 // LES FONCTIONS DE DATE
-require "./handle-dates.php";
+require "assets/handle-dates.php";
 
 //Le JSON
 $jsonData = json_decode(file_get_contents("./data.json"), true);
@@ -130,7 +128,7 @@ $total_rent = intval($base_rent, 10) + intval($charges, 10);
                     </table>
                 </div>
                 <!--Formulaire pour modifier les données Bailleurs-->
-                <form class="stakeholder_form hidden" id="owners-form" action="form.php" method="post">
+                <form class="stakeholder_form hidden" id="owners-form" action="index.php" method="post">
                     <div class="input-container">
                         <label for="owners_name">Nom des bailleurs</label>
                         <input name="owners_name" type="text" value="<?php echo ($owners_name) ?>">
@@ -287,7 +285,7 @@ $total_rent = intval($base_rent, 10) + intval($charges, 10);
 
     </main>
     <footer>
-        <script src="./forms-script.js"></script>
+        <script src="assets/forms-script.js"></script>
     </footer>
 </body>
 
