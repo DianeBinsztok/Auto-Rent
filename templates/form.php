@@ -1,11 +1,9 @@
 <?php
-//LA BASE DE DONNÉES
-//test
-require "./data.php";
-var_dump($sheets);
+// Test: j'ai bien accès aux sheets sur le template
+var_dump($getAllSheets);
 
 // LES FONCTIONS DE DATE
-require "./handle-dates.php";
+require "assets/handle-dates.php";
 
 //Le JSON
 $jsonData = json_decode(file_get_contents("./data.json"), true);
@@ -130,7 +128,7 @@ $total_rent = intval($base_rent, 10) + intval($charges, 10);
                     </table>
                 </div>
                 <!--Formulaire pour modifier les données Bailleurs-->
-                <form class="stakeholder_form hidden" id="owners-form" action="form.php" method="post">
+                <form class="stakeholder_form hidden" id="owners-form" action="index.php" method="post">
                     <div class="input-container">
                         <label for="owners_name">Nom des bailleurs</label>
                         <input name="owners_name" type="text" value="<?php echo ($owners_name) ?>">
@@ -185,7 +183,7 @@ $total_rent = intval($base_rent, 10) + intval($charges, 10);
                     </table>
                 </div>
                 <!--Formulaire pour modifier les données Bailleurs-->
-                <form class="stakeholder_form hidden" action="form.php" method="post">
+                <form class="stakeholder_form hidden" action="index.php" method="post">
                     <div class="input-container">
                         <label for="tenants_name">Nom des locataires</label>
                         <input name="tenants_name" type="text" value="<?php echo ($tenants_name) ?>">
@@ -219,7 +217,7 @@ $total_rent = intval($base_rent, 10) + intval($charges, 10);
                 </h2>
             </div>
             <!--Modification de la date-->
-            <form action="form.php" class="hidden" method="post">
+            <form action="index.php" class="hidden" method="post">
                 <label for="date">Loyer de :</label>
                 <input class="button" type="date" name="date">
                 <input class="button" type="submit" value="Enregistrer les modifications">
@@ -254,7 +252,7 @@ $total_rent = intval($base_rent, 10) + intval($charges, 10);
                         } ?>
                         <button class="button display_form" type="button">Modifier le montant</button>
                     </div>
-                    <form action="form.php" class="hidden" method="post">
+                    <form action="index.php" class="hidden" method="post">
                         <input class="button" type="number" name="base_rent"
                             value="<?php echo ($jsonData["rent"]["base"]) ?>">
                         <input class="button" type="submit" value="Enregistrer les modifications">
@@ -270,7 +268,7 @@ $total_rent = intval($base_rent, 10) + intval($charges, 10);
                         } ?>
                         <button class="button display_form" type="button">Modifier le montant</button>
                     </div>
-                    <form action="form.php" class="hidden" method="post">
+                    <form action="index.php" class="hidden" method="post">
                         <input class="button" type="number" name="charges" value="<?php echo ($charges) ?>">
                         <input class="button" type="submit" value="Enregistrer les modifications">
                     </form>
@@ -287,7 +285,7 @@ $total_rent = intval($base_rent, 10) + intval($charges, 10);
 
     </main>
     <footer>
-        <script src="./forms-script.js"></script>
+        <script src="assets/forms-script.js"></script>
     </footer>
 </body>
 
