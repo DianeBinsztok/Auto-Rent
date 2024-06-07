@@ -1,3 +1,2 @@
 <?php
-
-var_dump(getAllSheets());
+var_dump($sheets);

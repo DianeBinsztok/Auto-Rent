@@ -2,8 +2,8 @@
 
 require_once ('src/model.php');
 
-function allSheets()
+function allSheets($owner_id)
 {
-	$sheets = getAllSheets();
+	$sheets = getAllSheetsByUser($owner_id);
 	require ('templates/dashboard.php');
 }

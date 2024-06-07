@@ -1,13 +1,13 @@
 <?php
 
-//Afficher tous les appels de loyer
-function getAllSheets()
+//Afficher tous les appels de loyer d'un utilisateur
+function getAllSheetsByUser($user_id)
 {
     require "env.php";
     try {
         $database = new PDO($db . ':host=' . $db_host . ';dbname=' . $db_name . ';charset=' . $db_charset, $db_user, $db_pw);
         $statement = $database->query(
-            "SELECT * FROM `sheets` LIMIT 50;"
+            "SELECT * FROM sheets WHERE owner_id =" . intval($user_id, 10) . " LIMIT 50 ;"
         );
         $allSheets = $statement->fetchAll();
         return $allSheets;
