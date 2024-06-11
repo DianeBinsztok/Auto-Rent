@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./assets/style.css" rel="stylesheet" />
-    <title>Document</title>
+    <title>Autorent</title>
 </head>
 
 <body>
@@ -14,16 +14,25 @@
     <main>
 
         <h1>Vos appels de loyer</h1>
-        <?php
-        foreach ($sheets as $sheet) {
-            echo ("sheet id => " . $sheet["sheet_id"]);
-            echo ("sheet date => " . $sheet["sheet_date"]);
-            echo ("rent  => " . $sheet["sheet_rent"]);
-            echo ("charges => " . $sheet["sheet_charges"]);
-            echo ("owner id => " . $sheet["owner_id"]);
-            echo ("tenant id => " . $sheet["tenant_id"]);
-        }
-        ?>
+        <div id="sheets_container">
+
+            <?php
+            foreach ($sheets as $sheet) {
+                echo ("
+                    <div class='sheet_card' style='border:1px solid grey; padding:1rem;'>
+                    Appel de loyer du " . $sheet["sheet_date"] . "
+                    <ul>
+                        <li>Locataire(s) : " . $sheet["tenant_name"] . "</li>
+                        <li>Loyer : " . $sheet["sheet_rent"] . "</li>
+                        <li>Charges : " . $sheet["sheet_charges"] . "</li>
+                        <li>Réglé : <span class='sheet_paid' style='color:green'>Oui</span> </li>
+                    </ul>
+                    <div>
+                ");
+            }
+            ?>
+
+        </div>
 
     </main>
     <footer>
