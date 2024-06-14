@@ -17,6 +17,7 @@
         <div id="sheets_container">
 
             <?php
+            var_dump($owner_id);
             foreach ($sheets as $sheet) {
                 echo ("
                     <div class='sheet_card' style='border:1px solid grey; padding:1rem;'>
@@ -27,7 +28,8 @@
                         <li>Charges : " . $sheet["sheet_charges"] . "</li>
                         <li>Réglé : <span class='sheet_paid' style='color:green'>Oui</span> </li>
                     </ul>
-                    <div>
+                        <a href='?user=" . $owner_id . "&sheet=" . $sheet["sheet_id"] . "'>Voir le détail</a>
+                    </div>
                 ");
             }
             ?>
