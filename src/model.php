@@ -43,7 +43,10 @@ function getSheetById($id)
     try {
         $database = new PDO($db . ':host=' . $db_host . ';dbname=' . $db_name . ';charset=' . $db_charset, $db_user, $db_pw);
         $statement = $database->query(
-            "SELECT * FROM `sheets` WHERE sheet_id = " . $id . ";"
+            "SELECT * FROM `sheets` 
+            INNER JOIN tenants ON tenants.tenant_id=sheets.tenant_id
+            INNER JOIN owners ON owners.owner_id=sheets.owner_id
+            WHERE sheet_id = " . $id . ";"
         );
         $sheet = $statement->fetch();
         return $sheet;
