@@ -1,8 +1,8 @@
 <?php
-function getMonthAndYear()
+function getMonthAndYear($date)
 {
-    if ($_POST["date"]) {
-        $dateString = date('F Y', strtotime($_POST["date"]));
+    if ($date) {
+        $dateString = date('F Y', strtotime($date));
         $dateArray = explode(" ", $dateString);
         return toFrench($dateArray[0]) . " " . $dateArray[1];
     } else {
@@ -12,11 +12,11 @@ function getMonthAndYear()
     }
 }
 
-function getMonthInterval()
+function getMonthInterval($date)
 {
-    if ($_POST["date"]) {
-        $firstDay = date('01/m/Y', strtotime($_POST["date"]));
-        $lastDay = date('t/m/Y', strtotime($_POST["date"]));
+    if ($date) {
+        $firstDay = date('01/m/Y', strtotime($date));
+        $lastDay = date('t/m/Y', strtotime($date));
         return [$firstDay, $lastDay];
     } else {
         $firstDay = date('01/m/Y', strtotime('+1 month'));
@@ -28,6 +28,35 @@ function getMonthInterval()
 /* Correction du hiatus en français : la fonction doit aussi gérer la particule 'de' ou 'd' en fonction du mois */
 function toFrench($string)
 {
+    switch ($string) {
+        case "January":
+            return "de janvier";
+        case "February":
+            return "de février";
+        case "March":
+            return "de mars";
+        case "April":
+            return "d'avril";
+        case "May":
+            return "de mai";
+        case "June":
+            return "de juin";
+        case "July":
+            return "de juillet";
+        case "August":
+            return "d'août";
+        case "September":
+            return "de septembre";
+        case "October":
+            return "d'octobre";
+        case "November":
+            return "de novembre";
+        case "December":
+            return "de décembre";
+        default:
+            echo '';
+    }
+    /*
     if ($string == "January") {
         return "de janvier";
     }
@@ -64,4 +93,5 @@ function toFrench($string)
     if ($string == "December") {
         return "de décembre";
     }
+        */
 }

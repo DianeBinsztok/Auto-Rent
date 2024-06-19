@@ -1,0 +1,26 @@
+#sheets_container{
+    display: grid;
+    color: inherit;
+}
+#sheets_container a{
+    text-decoration: none;
+}
+
+.sheet_card{
+    border:1px solid grey; 
+    border-radius: 5px;
+    margin: 1rem;
+    padding:1rem;
+}
+.sheet_card:hover{
+    transition: all .1s ease-in-out;
+    transform: scale(1.03);
+}
+.sheet_card_date{
+    margin: 0;
+    padding:0.6rem;
+    text-align: center;
+    font-weight: bold;
+    color:white;
+    background-color:#457058;
+}

@@ -15,6 +15,9 @@
         <h1>Bonjour</h1>
     </header>
     <main>
+        <p>Identifiez-vous</p>
+        <p>Inscrivez-vous</p>
+
     </main>
     <footer>
 

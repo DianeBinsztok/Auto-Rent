@@ -1,6 +1,6 @@
 <?php
 // Test: j'ai bien accès aux sheets sur le template
-//var_dump($getAllSheets);
+var_dump(getSheetById(3));
 
 // LES FONCTIONS DE DATE
 require "assets/handle-dates.php";
