@@ -7,7 +7,7 @@ function getAllSheetsByUser($user_id)
     try {
         $database = new PDO($db . ':host=' . $db_host . ';dbname=' . $db_name . ';charset=' . $db_charset, $db_user, $db_pw);
         $statement = $database->query(
-            "SELECT * FROM sheets INNER JOIN tenants ON tenants.tenant_id=sheets.tenant_id WHERE owner_id =" . intval($user_id, 10) . " ;"
+            "SELECT sheet_id, sheet_date, sheet_rent, sheet_charges, tenants.tenant_id, tenants.tenant_name FROM sheets JOIN tenants ON tenants.tenant_id=sheets.tenant_id WHERE owner_id =" . intval($user_id, 10) . " ;"
         );
         $allSheets = $statement->fetchAll();
         return $allSheets;

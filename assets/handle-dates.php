@@ -56,42 +56,4 @@ function toFrench($string)
         default:
             echo '';
     }
-    /*
-    if ($string == "January") {
-        return "de janvier";
-    }
-    if ($string == "February") {
-        return "de février";
-    }
-    if ($string == "March") {
-        return "de mars";
-    }
-    if ($string == "April") {
-        return "d'avril";
-    }
-    if ($string == 'May') {
-        return "de mai";
-    }
-    if ($string == "June") {
-        return "de juin";
-    }
-    if ($string == "July") {
-        return "de juillet";
-    }
-    if ($string == "August") {
-        return "d'août";
-    }
-    if ($string == "September") {
-        return "de septembre";
-    }
-    if ($string == "October") {
-        return "d'octobre";
-    }
-    if ($string == "November") {
-        return "de novembre";
-    }
-    if ($string == "December") {
-        return "de décembre";
-    }
-        */
 }
