@@ -1,6 +1,7 @@
 <?php
 //Librairie FPDF : pour exporter l'appel de loyer en PDF
-require "fpdf/fpdf.php";
+//require "fpdf/fpdf.php";
+//require "./src/pdf.php";
 
 // Dashboard: afficher tous les appels de loyer pour un utilisateur. Si l'utilisateur n'est pas identifié, renvoyer la page de login (pas sécure)
 require "src/controllers/dashboard.php";

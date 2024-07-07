@@ -176,7 +176,22 @@ $total_rent = intval($rent, 10) + intval($charges, 10);
             </tr>
 
         </table>
-
+        <form action="src/generate-pdf.php" method="post">
+            <input type="hidden" name="sheet_id" value="<?php echo $sheet_id ?>">
+            <input type="hidden" name="owner_name" value="<?php echo $owner_name ?>">
+            <input type="hidden" name="owner_street" value="<?php echo $owner_street ?>">
+            <input type="hidden" name="owner_city" value="<?php echo $owner_city ?>">
+            <input type="hidden" name="tenant_name" value="<?php echo $tenant_name ?>">
+            <input type="hidden" name="tenant_street" value="<?php echo $tenant_street ?>">
+            <input type="hidden" name="tenant_city" value="<?php echo $tenant_city ?>">
+            <input type="hidden" name="date" value="<?php echo $date ?>">
+            <input type="hidden" name="first_date_of_month" value="<?php echo $firstDateOfMonth ?>">
+            <input type="hidden" name="last_date_of_month" value="<?php echo $lastDateOfMonth ?>">
+            <input type="hidden" name="rent" value="<?php echo $rent ?>">
+            <input type="hidden" name="charges" value="<?php echo $charges ?>">
+            <input type="hidden" name="total_rent" value="<?php echo $total_rent ?>">
+            <button>Exporter en PDF</button>
+        </form>
     </main>
     <footer>
     </footer>
