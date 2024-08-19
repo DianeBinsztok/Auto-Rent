@@ -29,9 +29,15 @@
             </select>
             <button id="clear-filters">Remettre les filtres à zéro</button>
             <!--</form>-->
-
         </div>
+
         <h1>Vos appels de loyer</h1>
+
+        <!--Créer un nouvel appel de loyer manuellement-->
+        <div id="new_sheet_container">
+            <a href="<?php echo "?user=" . $owner_id . "&action=new" ?>">Créer un nouvel appel de loyer</a>
+        </div>
+
         <div id="sheets_container">
             <?php
             foreach ($sheets as $sheet) {
@@ -50,7 +56,6 @@
                 ");
             }
             ?>
-
         </div>
 
     </main>

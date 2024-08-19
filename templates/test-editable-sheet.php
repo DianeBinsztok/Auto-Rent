@@ -1,7 +1,4 @@
 <?php
-// Test: j'ai bien accès aux sheets sur le template
-var_dump(getSheetById(3));
-
 // LES FONCTIONS DE DATE
 require "assets/handle-dates.php";
 
@@ -9,66 +6,66 @@ require "assets/handle-dates.php";
 //VARIABLES (non presistantes pour l'instant)
 
 //Bailleurs
-$owner_name;
-$owner_street;
-$owner_city;
+$owners_name;
+$owners_street;
+$owners_city;
 if ($_POST["owners_name"]) {
-    $owner_name = $_POST["owners_name"];
+    $owners_name = $_POST["owners_name"];
 } else {
-    $owner_name = "test";
+    $owner_name = $sheet["owner_name"];
 }
-if ($_POST["owner_street"]) {
-    $owner_street = $_POST["owner_street"];
+if ($_POST["owners_street"]) {
+    $owners_street = $_POST["owners_street"];
 } else {
-    $owners_street = "test";
+    $owners_street = $_POST["owners_street"];
 }
-if ($_POST["owner_city"]) {
-    $owners_city = $_POST["owner_city"];
+if ($_POST["owners_city"]) {
+    $owners_city = $_POST["owners_city"];
 } else {
-    $owners_city = "test";
+    $owners_city = $_POST["owners_city"];
 }
 
 //Locataires
-$tenant_name;
-$tenant_street;
-$tenant_city;
-if ($_POST["tenant_name"]) {
-    $tenants_name = $_POST["tenant_name"];
+$tenants_name;
+$tenants_street;
+$tenants_city;
+if ($_POST["tenants_name"]) {
+    $tenants_name = $_POST["tenants_name"];
 } else {
-    $tenants_name = "test";
+    $tenant_name = $sheet["tenant_name"];
 }
-if ($_POST["tenant_street"]) {
-    $tenants_street = $_POST["tenant_street"];
+if ($_POST["tenants_street"]) {
+    $tenants_street = $_POST["tenants_street"];
 } else {
-    $tenants_street = "test";
+    $tenant_street = $sheet["tenant_street"];
 }
 if ($_POST["tenants_city"]) {
-    $tenants_city = $_POST["tenant_city"];
+    $tenants_city = $_POST["tenants_city"];
 } else {
-    $tenants_city = "test";
+    $tenant_city = $sheet["tenant_city"];
 }
 //Dates
-$date = getMonthAndYear();
-$firstDateOfMonth = getMonthInterval()[0];
-$lastDateOfMonth = getMonthInterval()[1];
+$date = getMonthAndYear($sheet["sheet_date"]);
+$firstDateOfMonth = getMonthInterval($sheet["sheet_date"])[0];
+$lastDateOfMonth = getMonthInterval($sheet["sheet_date"])[1];
 
 
 
 
 
 //Rent
-$base_rent;
+$rent;
 $charges;
-if ($_POST["base_rent"]) {
-    $base_rent = $_POST["base_rent"];
-    $total_rent = intval($base_rent, 10) + intval($charges, 10);
+if ($_POST["rent"]) {
+    $rent = $_POST["rent"];
+    $total_rent = intval($rent, 10) + intval($charges, 10);
 } else {
-    $base_rent = $jsonData["rent"]["base"];
+    $rent = $sheet["sheet_rent"];
 }
 if ($_POST["charges"]) {
-    $charges = $_POST["charges"];
+    $charges = $sheet["sheet_charges"];
 } else {
-    $charges = $jsonData["rent"]["charges"];
+    $charges = "test";
 }
 $total_rent = intval($base_rent, 10) + intval($charges, 10);
 
@@ -81,7 +78,7 @@ $total_rent = intval($base_rent, 10) + intval($charges, 10);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="./assets/style.css" rel="stylesheet" />
+    <link href="./assets/stylesheets/style.css" rel="stylesheet" />
     <title>Document</title>
 </head>
 
@@ -96,7 +93,7 @@ $total_rent = intval($base_rent, 10) + intval($charges, 10);
                 <div class="editable-data">
                     <button class="button full-width-button display_form" type="button">Modifier les données bailleurs
                     </button>
-                    <table class="stakeholder" id="owner">
+                    <table class="stakeholder" id="owners">
                         <thead>
                             <tr>
                                 <th>Bailleurs</th>
@@ -104,40 +101,40 @@ $total_rent = intval($base_rent, 10) + intval($charges, 10);
                         </thead>
                         <tr>
                             <td>
-                                <?php if ($owner_name) {
-                                    echo ($owner_name);
+                                <?php if ($owners_name) {
+                                    echo ($owners_name);
                                 } ?>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <?php if ($owner_street) {
-                                    echo ($owner_street);
+                                <?php if ($owners_street) {
+                                    echo ($owners_street);
                                 } ?>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <?php if ($owner_city) {
-                                    echo ($owner_city);
+                                <?php if ($owners_city) {
+                                    echo ($owners_city);
                                 } ?>
                             </td>
                         </tr>
                     </table>
                 </div>
                 <!--Formulaire pour modifier les données Bailleurs-->
-                <form class="stakeholder_form hide" id="owner-form" action="index.php" method="post">
+                <form class="stakeholder_form hidden" id="owners-form" action="form.php" method="post">
                     <div class="input-container">
-                        <label for="owner_name">Nom des bailleurs</label>
-                        <input name="owner_name" type="text" value="<?php echo ($owner_name) ?>">
+                        <label for="owners_name">Nom des bailleurs</label>
+                        <input name="owners_name" type="text" value="<?php echo ($owners_name) ?>">
                     </div>
                     <div class="input-container">
-                        <label for="owner_street">N° et libellé de la voie</label>
-                        <input name="owner_street" type="text" value="<?php echo ($owner_street) ?>">
+                        <label for="owners_street">N° et libellé de la voie</label>
+                        <input name="owners_street" type="text" value="<?php echo ($owners_street) ?>">
                     </div>
                     <div class="input-container">
-                        <label for="owner_city">Code postal et ville</label>
-                        <input name="owner_city" type="text" value="<?php echo ($owner_city) ?>">
+                        <label for="owners_city">Code postal et ville</label>
+                        <input name="owners_city" type="text" value="<?php echo ($owners_city) ?>">
                     </div>
                     <div class="input-container submit_changes">
 
@@ -151,7 +148,7 @@ $total_rent = intval($base_rent, 10) + intval($charges, 10);
                     <!--Données Locataires en place-->
                     <button class="button full-width-button display_form" type="button">Modifier les données
                         locataires</button>
-                    <table id="tenant" class="stakeholder">
+                    <table id="tenants" class="stakeholder">
                         <thead>
                             <tr>
                                 <th>Locataires</th>
@@ -159,40 +156,40 @@ $total_rent = intval($base_rent, 10) + intval($charges, 10);
                         </thead>
                         <tr>
                             <td>
-                                <?php if ($tenant_name) {
-                                    echo ($tenant_name);
+                                <?php if ($tenants_name) {
+                                    echo ($tenants_name);
                                 } ?>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <?php if ($tenant_street) {
-                                    echo ($tenant_street);
+                                <?php if ($tenants_street) {
+                                    echo ($tenants_street);
                                 } ?>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <?php if ($tenant_city) {
-                                    echo ($tenant_city);
+                                <?php if ($tenants_city) {
+                                    echo ($tenants_city);
                                 } ?>
                             </td>
                         </tr>
                     </table>
                 </div>
                 <!--Formulaire pour modifier les données Bailleurs-->
-                <form class="stakeholder_form hide" action="index.php" method="post">
+                <form class="stakeholder_form hidden" action="form.php" method="post">
                     <div class="input-container">
-                        <label for="tenant_name">Nom des locataires</label>
-                        <input name="tenant_name" type="text" value="<?php echo ($tenant_name) ?>">
+                        <label for="tenants_name">Nom des locataires</label>
+                        <input name="tenants_name" type="text" value="<?php echo ($tenants_name) ?>">
                     </div>
                     <div class="input-container">
-                        <label for="tenant_street">N° et libellé de la voie</label>
-                        <input name="tenant_street" type="text" value="<?php echo ($tenant_street) ?>">
+                        <label for="tenants_street">N° et libellé de la voie</label>
+                        <input name="tenants_street" type="text" value="<?php echo ($tenants_street) ?>">
                     </div>
                     <div class="input-container">
-                        <label for="tenant_city">Code postal et ville</label>
-                        <input name="tenant_city" type="text" value="<?php echo ($tenant_city) ?>">
+                        <label for="tenants_city">Code postal et ville</label>
+                        <input name="tenants_city" type="text" value="<?php echo ($tenants_city) ?>">
                     </div>
                     <div class="input-container submit_changes">
                         <input class="button" type="submit" value="Enregistrer les modifications">
@@ -215,7 +212,7 @@ $total_rent = intval($base_rent, 10) + intval($charges, 10);
                 </h2>
             </div>
             <!--Modification de la date-->
-            <form action="index.php" class="hide" method="post">
+            <form action="form.php" class="hidden" method="post">
                 <label for="date">Loyer de :</label>
                 <input class="button" type="date" name="date">
                 <input class="button" type="submit" value="Enregistrer les modifications">
@@ -245,14 +242,13 @@ $total_rent = intval($base_rent, 10) + intval($charges, 10);
                 <th scope="row">Loyer mensuel contractuel :</th>
                 <td class="editable-data_container">
                     <div class="editable-data">
-                        <?php if ($base_rent) {
-                            echo ($base_rent . " €");
+                        <?php if ($rent) {
+                            echo ($rent . " €");
                         } ?>
                         <button class="button display_form" type="button">Modifier le montant</button>
                     </div>
-                    <form action="index.php" class="hide" method="post">
-                        <input class="button" type="number" name="base_rent"
-                            value="<?php echo ($jsonData["rent"]["base"]) ?>">
+                    <form action="form.php" class="hidden" method="post">
+                        <input class="button" type="number" name="rent" value="<?php echo $rent ?>">
                         <input class="button" type="submit" value="Enregistrer les modifications">
                     </form>
                 </td>
@@ -266,7 +262,7 @@ $total_rent = intval($base_rent, 10) + intval($charges, 10);
                         } ?>
                         <button class="button display_form" type="button">Modifier le montant</button>
                     </div>
-                    <form action="index.php" class="hidden" method="post">
+                    <form action="form.php" class="hidden" method="post">
                         <input class="button" type="number" name="charges" value="<?php echo ($charges) ?>">
                         <input class="button" type="submit" value="Enregistrer les modifications">
                     </form>
@@ -283,7 +279,7 @@ $total_rent = intval($base_rent, 10) + intval($charges, 10);
 
     </main>
     <footer>
-        <script src="assets/forms-script.js"></script>
+
     </footer>
 </body>
 

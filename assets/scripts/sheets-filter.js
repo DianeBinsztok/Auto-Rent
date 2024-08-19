@@ -1,31 +1,31 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-        // I - FILTRAGE PAR LOCATAIRE
-        let tenantFilter = document.getElementById("tenant-filter");
-        tenantFilter.addEventListener("change",(event) => {
-            filters.tenant.active = true; 
-            filters.tenant.value = event.target.value;
-            checkAllSheets();
-        });
-
-        // II - FILTRAGE PAR DATE
-        let dateFilter = document.getElementById("date-filter");
-        dateFilter.addEventListener("change",(event) => {
-            filters.date.active = true; 
-            filters.date.value = event.target.value; 
-            checkAllSheets();
-        });
-
-        // III - REMISE À ZÉRO
-        let clearButton = document.getElementById("clear-filters");
-        clearButton.addEventListener("click", ()=>{
-        filters.date.active = false;
-        filters.date.value = "";
-        filters.tenant.active = false;
-        filters.tenant.value = "";
-        tenantFilter.value = "";
-        dateFilter.value = "";
+    // I - FILTRAGE PAR LOCATAIRE
+    let tenantFilter = document.getElementById("tenant-filter");
+    tenantFilter.addEventListener("change",(event) => {
+        filters.tenant.active = true; 
+        filters.tenant.value = event.target.value;
         checkAllSheets();
+    });
+
+    // II - FILTRAGE PAR DATE
+    let dateFilter = document.getElementById("date-filter");
+    dateFilter.addEventListener("change",(event) => {
+        filters.date.active = true; 
+        filters.date.value = event.target.value; 
+        checkAllSheets();
+    });
+
+    // III - REMISE À ZÉRO
+    let clearButton = document.getElementById("clear-filters");
+    clearButton.addEventListener("click", ()=>{
+    filters.date.active = false;
+    filters.date.value = "";
+    filters.tenant.active = false;
+    filters.tenant.value = "";
+    tenantFilter.value = "";
+    dateFilter.value = "";
+    checkAllSheets();
 
     });
 

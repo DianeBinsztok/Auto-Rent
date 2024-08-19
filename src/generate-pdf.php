@@ -58,7 +58,7 @@ if ($_POST) {
     $pageWidth = $pdf->GetPageWidth();
     $xPosition = $pageWidth - $tenantCellWidth - 10; // -10 pour soustraire la marge gauche
 
-    // 2.2 - Définir la position et ajouter l'encadré'
+    // 2.2 - Définir la position et ajouter l'encadré
     $pdf->SetX($xPosition);
     $pdf->Cell($tenantCellWidth, 10, "Locataires", 1, 2, "L", false);
     //Avec le paramètre align 'L', la multicell se place automatiquement sur la même position que la Cell de titre

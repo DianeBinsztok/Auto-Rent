@@ -1,77 +1,57 @@
 <?php
-// Test: j'ai bien accès aux sheets sur le template
-var_dump(getSheetById(3));
-
 // LES FONCTIONS DE DATE
 require "assets/handle-dates.php";
 
-
-//VARIABLES (non presistantes pour l'instant)
-
+$sheet_id = $sheet["sheet_id"];
+// Si on reçoit des données en POST, update en base de données et rafficher la page
 //Bailleurs
-$owner_name;
-$owner_street;
-$owner_city;
-if ($_POST["owners_name"]) {
-    $owner_name = $_POST["owners_name"];
+if ($_POST["owner_name"]) {
+    $owner_name = $_POST["owner_name"];
 } else {
-    $owner_name = "test";
+    $owner_name = $sheet["owner_name"];
 }
 if ($_POST["owner_street"]) {
     $owner_street = $_POST["owner_street"];
 } else {
-    $owners_street = "test";
+    $owner_street = $sheet["owner_street"];
 }
 if ($_POST["owner_city"]) {
-    $owners_city = $_POST["owner_city"];
+    $owner_city = $_POST["owner_city"];
 } else {
-    $owners_city = "test";
+    $owner_city = $sheet["owner_city"];
 }
+
 
 //Locataires
-$tenant_name;
-$tenant_street;
-$tenant_city;
+
+
+
 if ($_POST["tenant_name"]) {
-    $tenants_name = $_POST["tenant_name"];
+    $tenant_name = $_POST["tenant_name"];
 } else {
-    $tenants_name = "test";
+    $tenant_name = $sheet["tenant_name"];
 }
 if ($_POST["tenant_street"]) {
-    $tenants_street = $_POST["tenant_street"];
+    $tenant_street = $_POST["tenant_street"];
 } else {
-    $tenants_street = "test";
+    $tenant_street = $sheet["tenant_street"];
 }
-if ($_POST["tenants_city"]) {
-    $tenants_city = $_POST["tenant_city"];
+if ($_POST["tenant_city"]) {
+    $tenant_city = $_POST["tenant_city"];
 } else {
-    $tenants_city = "test";
+    $tenant_city = $sheet["tenant_city"];
 }
 //Dates
-$date = getMonthAndYear();
-$firstDateOfMonth = getMonthInterval()[0];
-$lastDateOfMonth = getMonthInterval()[1];
+$date = getMonthAndYear($sheet["sheet_date"]);
 
-
-
+$firstDateOfMonth = getMonthInterval($sheet["sheet_date"])[0];
+$lastDateOfMonth = getMonthInterval($sheet["sheet_date"])[1];
 
 
 //Rent
-$base_rent;
-$charges;
-if ($_POST["base_rent"]) {
-    $base_rent = $_POST["base_rent"];
-    $total_rent = intval($base_rent, 10) + intval($charges, 10);
-} else {
-    $base_rent = $jsonData["rent"]["base"];
-}
-if ($_POST["charges"]) {
-    $charges = $_POST["charges"];
-} else {
-    $charges = $jsonData["rent"]["charges"];
-}
-$total_rent = intval($base_rent, 10) + intval($charges, 10);
-
+$rent = $sheet["sheet_rent"];
+$charges = $sheet["sheet_charges"];
+$total_rent = intval($rent, 10) + intval($charges, 10);
 ?>
 
 
@@ -81,7 +61,7 @@ $total_rent = intval($base_rent, 10) + intval($charges, 10);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="./assets/style.css" rel="stylesheet" />
+    <link href="./assets/stylesheets/style.css" rel="stylesheet" />
     <title>Document</title>
 </head>
 
@@ -89,11 +69,10 @@ $total_rent = intval($base_rent, 10) + intval($charges, 10);
     <header>
         <img id="logo" src="./assets/rophie-logo.png" alt="Rophie location">
 
-
         <section id="stakeholders_container">
             <div class="editable-data_container">
-                <!--Données Bailleurs en place-->
                 <div class="editable-data">
+                    <!--Données Bailleurs en place-->
                     <button class="button full-width-button display_form" type="button">Modifier les données bailleurs
                     </button>
                     <table class="stakeholder" id="owner">
@@ -126,7 +105,7 @@ $total_rent = intval($base_rent, 10) + intval($charges, 10);
                     </table>
                 </div>
                 <!--Formulaire pour modifier les données Bailleurs-->
-                <form class="stakeholder_form hide" id="owner-form" action="index.php" method="post">
+                <form class="stakeholder_form hide" id="owner-form" action="#" method="post">
                     <div class="input-container">
                         <label for="owner_name">Nom des bailleurs</label>
                         <input name="owner_name" type="text" value="<?php echo ($owner_name) ?>">
@@ -140,7 +119,6 @@ $total_rent = intval($base_rent, 10) + intval($charges, 10);
                         <input name="owner_city" type="text" value="<?php echo ($owner_city) ?>">
                     </div>
                     <div class="input-container submit_changes">
-
                         <!--Enregistrer les modifications-->
                         <input class="button" id="submitOwnersForm" type="submit" value="Enregistrer les modifications">
                     </div>
@@ -181,7 +159,7 @@ $total_rent = intval($base_rent, 10) + intval($charges, 10);
                     </table>
                 </div>
                 <!--Formulaire pour modifier les données Bailleurs-->
-                <form class="stakeholder_form hide" action="index.php" method="post">
+                <form class="stakeholder_form hide" action="#" method="post">
                     <div class="input-container">
                         <label for="tenant_name">Nom des locataires</label>
                         <input name="tenant_name" type="text" value="<?php echo ($tenant_name) ?>">
@@ -204,27 +182,21 @@ $total_rent = intval($base_rent, 10) + intval($charges, 10);
     <main>
 
         <h1>Avis d'échéance</h1>
-        <div class="editable-data_container">
-            <!--La date donnée-->
-            <div class="editable-data">
-                <button class="button display_form" type="button">Modifier manuellement la date</button>
-                <h2>Loyer
-                    <?php if ($date) {
-                        echo ($date);
-                    } ?>
-                </h2>
-            </div>
-            <!--Modification de la date-->
-            <form action="index.php" class="hide" method="post">
-                <label for="date">Loyer de :</label>
-                <input class="button" type="date" name="date">
-                <input class="button" type="submit" value="Enregistrer les modifications">
-            </form>
-        </div>
+        <!--La date donnée-->
+        <h2>Loyer
+            <?php if ($date) {
+                echo ($date);
+            } ?>
+        </h2>
 
 
 
-        <p>Avis n° 3</p>
+
+
+        <p>Avis n° <?php if ($sheet_id) {
+            echo ($sheet_id);
+        } ?>
+        </p>
         <p>Pour la période du <span class="highlight">
                 <?php if ($firstDateOfMonth) {
                     echo ($firstDateOfMonth);
@@ -243,47 +215,51 @@ $total_rent = intval($base_rent, 10) + intval($charges, 10);
             </thead>
             <tr>
                 <th scope="row">Loyer mensuel contractuel :</th>
-                <td class="editable-data_container">
-                    <div class="editable-data">
-                        <?php if ($base_rent) {
-                            echo ($base_rent . " €");
+                <td>
+                    <div>
+                        <?php if ($rent) {
+                            echo ($rent . " €");
                         } ?>
-                        <button class="button display_form" type="button">Modifier le montant</button>
                     </div>
-                    <form action="index.php" class="hide" method="post">
-                        <input class="button" type="number" name="base_rent"
-                            value="<?php echo ($jsonData["rent"]["base"]) ?>">
-                        <input class="button" type="submit" value="Enregistrer les modifications">
-                    </form>
                 </td>
             </tr>
             <tr>
                 <th scope="row">Charges locatives mensuelles contractuelles :</th>
-                <td class="editable-data_container">
-                    <div class="editable-data">
+                <td>
+                    <div>
                         <?php if ($charges) {
                             echo ($charges . " €");
                         } ?>
-                        <button class="button display_form" type="button">Modifier le montant</button>
                     </div>
-                    <form action="index.php" class="hidden" method="post">
-                        <input class="button" type="number" name="charges" value="<?php echo ($charges) ?>">
-                        <input class="button" type="submit" value="Enregistrer les modifications">
-                    </form>
                 </td>
             </tr>
             <tr>
                 <th scope="row">Montant total dû :</th>
                 <td><span class="highlight" id="sum">
-                        <?php echo ($total_rent); ?>
+                        <?php echo ($total_rent . " €"); ?>
                     </span></td>
             </tr>
 
         </table>
-
+        <form action="src/generate-pdf.php" method="post">
+            <input type="hidden" name="sheet_id" value="<?php echo $sheet_id ?>">
+            <input type="hidden" name="owner_name" value="<?php echo $owner_name ?>">
+            <input type="hidden" name="owner_street" value="<?php echo $owner_street ?>">
+            <input type="hidden" name="owner_city" value="<?php echo $owner_city ?>">
+            <input type="hidden" name="tenant_name" value="<?php echo $tenant_name ?>">
+            <input type="hidden" name="tenant_street" value="<?php echo $tenant_street ?>">
+            <input type="hidden" name="tenant_city" value="<?php echo $tenant_city ?>">
+            <input type="hidden" name="date" value="<?php echo $date ?>">
+            <input type="hidden" name="first_date_of_month" value="<?php echo $firstDateOfMonth ?>">
+            <input type="hidden" name="last_date_of_month" value="<?php echo $lastDateOfMonth ?>">
+            <input type="hidden" name="rent" value="<?php echo $rent ?>">
+            <input type="hidden" name="charges" value="<?php echo $charges ?>">
+            <input type="hidden" name="total_rent" value="<?php echo $total_rent ?>">
+            <button>Créer un nouvel appel de loyer</button>
+        </form>
     </main>
     <footer>
-        <script src="assets/forms-script.js"></script>
+        <script src="./assets/scripts/forms-script.js"></script>
     </footer>
 </body>
 
