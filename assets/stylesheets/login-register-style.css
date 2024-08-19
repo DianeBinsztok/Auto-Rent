@@ -1,0 +1,11 @@
+#login-or-register_container{
+    width:80%;
+    display:flex; 
+    justify-content:space-between;
+    align-items:end;
+}
+
+#register-form, #login-form{
+    display:flex; 
+    flex-direction:column; 
+}

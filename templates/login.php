@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./assets/stylesheets/style.css" rel="stylesheet" />
+    <link href="./assets/stylesheets/login-register-style.css" rel="stylesheet" />
     <title>Document</title>
 </head>
 
@@ -14,8 +15,9 @@
     <header>
         <h1>Bonjour</h1>
     </header>
-    <main style="display:flex; justify-content:space-between;">
-        <form method="post" style="display:flex; flex-direction:column; margin:5rem;">
+    <main id="login-or-register_container">
+
+        <form id="login-form" method="post">
             <h2>Identifiez-vous</h2>
             <label for="email">Votre email</label>
             <input name="email" type="email">
@@ -23,7 +25,8 @@
             <input name="password" type="password" required>
             <button type="submit">Je m'identifie</button>
         </form>
-        <form method="post" style="display:flex; flex-direction:column">
+
+        <form id="register-form" method="post">
             <p>Pas encore inscrit?</p>
             <h2>Inscrivez-vous ici</h2>
             <label for="name">Votre nom</label>
