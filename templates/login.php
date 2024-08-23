@@ -1,5 +1,3 @@
-<?php
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,12 +15,13 @@
     </header>
     <main id="login-or-register_container">
 
-        <form id="login-form" method="post">
+
+        <form id="login-form" method="post" action="index.php">
             <h2>Identifiez-vous</h2>
-            <label for="email">Votre email</label>
-            <input name="email" type="email">
-            <label for="password">Votre mot de passe</label>
-            <input name="password" type="password" required>
+            <label for="user_email">Votre email</label>
+            <input name="user_email" type="email" required>
+            <label for="user_password">Votre mot de passe</label>
+            <input name="user_password" type="password" required>
             <button type="submit">Je m'identifie</button>
         </form>
 
@@ -45,7 +44,7 @@
         </form>
     </main>
     <footer>
-        <script src="./assets/login-check-script.js"></script>
+        <script src="./assets/scripts/login-check-script.js"></script>
     </footer>
 </body>
 

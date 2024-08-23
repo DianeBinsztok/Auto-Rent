@@ -1,6 +1,6 @@
 <?php
-
-require_once ('src/model.php');
+echo ("dashboard-controller.php");
+require_once('src/model.php');
 
 function allSheets($owner_id)
 {
@@ -19,5 +19,5 @@ function allSheets($owner_id)
 			array_push($tenants, array("tenant_id" => $tenant["tenant_id"], "tenant_name" => $tenant["tenant_name"], ));
 		}
 	}
-	require ('templates/dashboard.php');
+	require('templates/dashboard.php');
 }

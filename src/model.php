@@ -1,4 +1,21 @@
 <?php
+//Retourner tous les utilisateurs
+function getAllUsers()
+{
+    require "env.php";
+    try {
+        $database = new PDO($db . ':host=' . $db_host . ';dbname=' . $db_name . ';charset=' . $db_charset, $db_user, $db_pw);
+        $statement = $database->query(
+            "SELECT * FROM users;"
+        );
+        $allUsers = $statement->fetchAll();
+        return $allUsers;
+
+    } catch (Exception $e) {
+        echo ("Impossible d'accéder à la liste des propriétaires");
+        die('Erreur : ' . $e->getMessage());
+    }
+}
 
 //Afficher tous les appels de loyer d'un utilisateur
 function getAllSheetsByUser($user_id)
