@@ -1,6 +1,7 @@
 <?php
 // LOGIN
 require "src/controllers/login-controller.php";
+
 if ($_POST["user_email"] && $_POST["user_password"]) {
     userAuth();
 } else {
