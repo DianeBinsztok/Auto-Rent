@@ -1,5 +1,4 @@
 <?php
-echo ("dashboard-controller.php");
 require_once('src/model.php');
 
 function allSheets($owner_id)

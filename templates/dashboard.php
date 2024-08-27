@@ -12,55 +12,59 @@
 <body>
     <header>
     </header>
+    <nav>
+        <a href="">Accueil</a>
+        <a href="">Mes biens à louer</a>
+        <a href="">Mes documents</a>
+        <a href="">Mes appels de loyer</a>
+        <a href="">Mon profil</a>
+    </nav>
     <main>
-        <div>
-            <p>Filtrer la recherche:</p>
-            <!--<form method="" action="">-->
-            <label for="date">par date:</label>
-            <input type="month" name="date" id="date-filter" value="">
-            <label for="tenant">par locataire:</label>
-            <select name="tenant" id="tenant-filter">
-                <option value="">--Choisissez un locataire--</option>
-                <?php
-                foreach ($tenants as $tenant) {
-                    echo ("<option value='" . $tenant["tenant_id"] . "'>" . $tenant["tenant_id"] . " - " . $tenant["tenant_name"] . "</option>");
-                }
-                ?>
-            </select>
-            <button id="clear-filters">Remettre les filtres à zéro</button>
-            <!--</form>-->
-        </div>
+        <h1>Tableau de bord</h1>
+        <?php
+        if ($owner_id) {
+            //var_dump($locations);
+            echo ("
+                <section>
+                    <h2>Mes biens à louer</h2>
+                    <div id='locations-container'>
+                    ");
 
-        <h1>Vos appels de loyer</h1>
+            foreach ($locations as $location) {
+                echo ("<div class='location' style='border: 1px solid black;'>
+                                <h3>" . $location["label"] . "</h3>
+                                <p>" . $location["rooms"] . " pièce(s)</p>
 
-        <!--Créer un nouvel appel de loyer manuellement-->
-        <div id="new_sheet_container">
-            <a href="<?php echo "?user=" . $owner_id . "&action=new" ?>">Créer un nouvel appel de loyer</a>
-        </div>
-
-        <div id="sheets_container">
-            <?php
-            foreach ($sheets as $sheet) {
-                echo ("
-                    <div class='sheet_card tenant-" . $sheet["tenant_id"] . " date-" . $sheet["sheet_date"] . "'>
-                        <a href='?user=" . $owner_id . "&sheet=" . $sheet["sheet_id"] . "'>
-                            <p class='sheet_card_date'>Appel de loyer du " . $sheet["sheet_date"] . "</p>
-                            <ul>
-                                <li>Locataire(s) : " . $sheet["tenant_name"] . "</li>
-                                <li>Loyer : " . $sheet["sheet_rent"] . "</li>
-                                <li>Charges : " . $sheet["sheet_charges"] . "</li>
-                                <li>Réglé : <span class='sheet_paid' style='color:green'>Oui</span> </li>
-                            </ul>
-                        </a>
-                    </div>
-                ");
+                                <h3>Adresse :</h3>
+                                <p>" . $location["street_number"] . " " . $location["street_type"] . " " . $location["street_name"] . "</p>
+                                <p>" . $location["postal_code"] . " " . $location["city"] . "</p>
+                            </div>");
             }
-            ?>
-        </div>
+
+            echo ("
+                    </div>
+                </section>
+            ");
+        }
+        if ($tenant_id) {
+            echo ("
+            <section>
+                <h2>Mes informations locataire:</h2>
+                <h3>" . $tenant["name"] . "</h3>
+                <h3>Adresse :</h3>
+                <p>" . $tenant["label"] . "</p>
+                <p>" . $tenant["street_number"] . " " . $tenant["street_type"] . " " . $tenant["street_name"] . "</p>
+                <p>" . $tenant["postal_code"] . " " . $tenant["city"] . "</p>
+            </section>
+            ");
+        }
+        ?>
+
+
 
     </main>
     <footer>
-        <script src="./assets/scripts/sheets-filter.js"></script>
+
     </footer>
 </body>
 

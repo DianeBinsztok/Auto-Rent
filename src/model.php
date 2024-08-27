@@ -17,6 +17,44 @@ function getAllUsers()
     }
 }
 
+// I- LES PROPRIÉTAIRES
+//Afficher tous les biens à louer d'un propriétaire
+function getAllLocations($owner_id)
+{
+    require "env.php";
+    try {
+        $database = new PDO($db . ':host=' . $db_host . ';dbname=' . $db_name . ';charset=' . $db_charset, $db_user, $db_pw);
+        $statement = $database->query(
+            "SELECT * from locations WHERE owner_id =" . intval($owner_id, 10) . " ;"
+        );
+        $allLocations = $statement->fetchAll();
+        return $allLocations;
+
+    } catch (Exception $e) {
+        echo ("Impossible d'accéder aux bien à louer");
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
+// II - LES LOCATAIRES
+// Afficher les données sur un locataire
+function getTenantInfo($tenant_id)
+{
+    require "env.php";
+    try {
+        $database = new PDO($db . ':host=' . $db_host . ';dbname=' . $db_name . ';charset=' . $db_charset, $db_user, $db_pw);
+        $statement = $database->query(
+            "SELECT * from tenants JOIN locations ON locations.id = tenants.location_id WHERE tenants.id =" . intval($tenant_id, 10) . " ;"
+        );
+        $tenant = $statement->fetch();
+        return $tenant;
+
+    } catch (Exception $e) {
+        echo ("Impossible d'accéder aux données du locataire");
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+/*
 //Afficher tous les appels de loyer d'un utilisateur
 function getAllSheetsByUser($user_id)
 {
@@ -100,3 +138,4 @@ function getSheetById($id)
     }
 }
 
+*/
