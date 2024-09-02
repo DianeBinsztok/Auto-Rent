@@ -30,12 +30,14 @@
 
             foreach ($locations as $location) {
                 echo ("<div class='location' style='border: 1px solid black;'>
+                                <a href='?location=" . $location["id"] . "'>
                                 <h3>" . $location["label"] . "</h3>
                                 <p>" . $location["rooms"] . " pièce(s)</p>
 
                                 <h3>Adresse :</h3>
                                 <p>" . $location["street_number"] . " " . $location["street_type"] . " " . $location["street_name"] . "</p>
                                 <p>" . $location["postal_code"] . " " . $location["city"] . "</p>
+                                </a>
                             </div>");
             }
 
