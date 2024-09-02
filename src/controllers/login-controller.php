@@ -5,13 +5,13 @@ require_once 'src/model.php';
 function userAuth()
 {
     // 1 - Récupérer tous les utilisateurs inscrits
-    $usersList = getAllUsers();
+    $ownersList = getAllOwners();
 
     // 2 - Récupérer les données de $_POST et chercher une correspondance dans $usersList 
     if ($_POST["user_email"] && $_POST["user_password"]) {
 
-        foreach ($usersList as $user) {
-            if ($user['email'] == $_POST["user_email"] && $user['password'] == $_POST["user_password"]) {
+        foreach ($ownersList as $owner) {
+            if ($owner['email'] == $_POST["user_email"] && $owner['password'] == $_POST["user_password"]) {
                 echo "Utilisateur authentifié avec succès";
                 require('dashboard-controller.php');
                 break;

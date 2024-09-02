@@ -15,15 +15,13 @@
     <nav>
         <a href="">Accueil</a>
         <a href="">Mes biens à louer</a>
-        <a href="">Mes documents</a>
-        <a href="">Mes appels de loyer</a>
+        <a href="">Enregistrer un logement à louer</a>
         <a href="">Mon profil</a>
     </nav>
     <main>
         <h1>Tableau de bord</h1>
         <?php
         if ($owner_id) {
-            //var_dump($locations);
             echo ("
                 <section>
                     <h2>Mes biens à louer</h2>
@@ -44,18 +42,6 @@
             echo ("
                     </div>
                 </section>
-            ");
-        }
-        if ($tenant_id) {
-            echo ("
-            <section>
-                <h2>Mes informations locataire:</h2>
-                <h3>" . $tenant["name"] . "</h3>
-                <h3>Adresse :</h3>
-                <p>" . $tenant["label"] . "</p>
-                <p>" . $tenant["street_number"] . " " . $tenant["street_type"] . " " . $tenant["street_name"] . "</p>
-                <p>" . $tenant["postal_code"] . " " . $tenant["city"] . "</p>
-            </section>
             ");
         }
         ?>

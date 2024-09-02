@@ -1,15 +1,15 @@
 <?php
-//Retourner tous les utilisateurs
-function getAllUsers()
+//I - Authentification utilisateur
+function getAllOwners()
 {
     require "env.php";
     try {
         $database = new PDO($db . ':host=' . $db_host . ';dbname=' . $db_name . ';charset=' . $db_charset, $db_user, $db_pw);
         $statement = $database->query(
-            "SELECT * FROM users;"
+            "SELECT * FROM owners;"
         );
-        $allUsers = $statement->fetchAll();
-        return $allUsers;
+        $allOwners = $statement->fetchAll();
+        return $allOwners;
 
     } catch (Exception $e) {
         echo ("Impossible d'accéder à la liste des propriétaires");
@@ -17,8 +17,7 @@ function getAllUsers()
     }
 }
 
-// I- LES PROPRIÉTAIRES
-//Afficher tous les biens à louer d'un propriétaire
+// II - Afficher tous les biens à louer d'un propriétaire
 function getAllLocations($owner_id)
 {
     require "env.php";
@@ -36,7 +35,7 @@ function getAllLocations($owner_id)
     }
 }
 
-// II - LES LOCATAIRES
+/*
 // Afficher les données sur un locataire
 function getTenantInfo($tenant_id)
 {
@@ -54,7 +53,7 @@ function getTenantInfo($tenant_id)
         die('Erreur : ' . $e->getMessage());
     }
 }
-/*
+
 //Afficher tous les appels de loyer d'un utilisateur
 function getAllSheetsByUser($user_id)
 {
