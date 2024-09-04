@@ -1,13 +1,18 @@
 <?php
 // LOGIN
 require "src/controllers/login-controller.php";
-
 if ($_POST["user_email"] && $_POST["user_password"]) {
     userAuth();
+
 } else {
     require "templates/login.php";
 }
 
+// LOCATION DETAIL
+if (isset($_GET["location"]) && $_GET["location"] !== '') {
+    require "src/controllers/location-controller.php";
+    getLocationDetail($_GET["location"]);
+}
 
 /*
 // Dashboard: afficher tous les appels de loyer pour un utilisateur. Si l'utilisateur n'est pas identifié, renvoyer la page de login (pas sécure)

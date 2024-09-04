@@ -17,7 +17,7 @@ function getAllOwners()
     }
 }
 
-// II - Afficher tous les biens à louer d'un propriétaire
+// II - Afficher tous les logements à louer d'un propriétaire
 function getAllLocations($owner_id)
 {
     require "env.php";
@@ -34,6 +34,25 @@ function getAllLocations($owner_id)
         die('Erreur : ' . $e->getMessage());
     }
 }
+
+// III - Afficher le détail d'un logement à louer
+function getOneLocationDetail($location_id)
+{
+    require "env.php";
+    try {
+        $database = new PDO($db . ':host=' . $db_host . ';dbname=' . $db_name . ';charset=' . $db_charset, $db_user, $db_pw);
+        $statement = $database->query(
+            "SELECT * from locations WHERE locations.id =" . intval($location_id, 10) . " ;"
+        );
+        $LocationDetail = $statement->fetch();
+        return $LocationDetail;
+
+    } catch (Exception $e) {
+        echo ("Impossible d'accéder aux données de ce logement");
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
 
 /*
 // Afficher les données sur un locataire
