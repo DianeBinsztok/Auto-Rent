@@ -16,7 +16,7 @@
     <main id="login-or-register_container">
 
 
-        <form id="login-form" method="post" action="index.php">
+        <form id="login-form" method="post" action=<?php echo (BASE_URL . "dashboard") ?>>
             <h2>Identifiez-vous</h2>
             <label for="user_email">Votre email</label>
             <input name="user_email" type="email" required>

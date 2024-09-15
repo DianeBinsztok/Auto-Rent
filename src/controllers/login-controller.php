@@ -1,33 +1,38 @@
 <?php
+echo ("login-controller =>");
 require_once 'src/model.php';
 
-/* AUTHENTIFICATION UTILISATEUR */
-function userAuth()
+/* I - AFFICHAGE DE LA PAGE DE LOGIN */
+function displayLoginPage()
 {
+    require("templates/login.php");
+}
+
+/* II - AUTHENTIFICATION UTILISATEUR */
+function identifyUserAndCreateSession($user_email, $user_password)
+{
+
     // 1 - Récupérer tous les utilisateurs inscrits
     $ownersList = getAllOwners();
 
-    // 2 - Récupérer les données de $_POST et chercher une correspondance dans $ownersList 
-    if ($_POST["user_email"] && $_POST["user_password"]) {
+    // 2 - Chercher une correspondance avec les données de l'utilisateur récupérées en $_POST
+    foreach ($ownersList as $owner) {
 
-        foreach ($ownersList as $owner) {
+        // 2.1 - Si on trouve une correspondance : créer une session utilisateur
+        if ($owner['email'] == $user_email && $owner['password'] == $user_password) {
 
-            if ($owner['email'] == $_POST["user_email"] && $owner['password'] == $_POST["user_password"]) {
-                $owner_id = $owner['id'];
+            session_start();
+            $_SESSION["session_id"] = session_id();
+            $_SESSION["owner_id"] = $owner['id'];
+            $_SESSION["owner_email"] = $owner['email'];
+            return $_SESSION;
+        }
 
-                //a - Aller chercher la fonction allLocations dans dashboard-controller pour récupérer la listes des logements de l'utilisateur
-                require('dashboard-controller.php');
-                $locations = allLocations($owner_id);
-
-                //b - Afficher le tableau de bord avec les logements récupérés
-                require("templates/dashboard.php");
-                break;
-
-            } else {
-                echo "Il semble que vous ne soyez pas encore inscrit";
-                break;
-            }
+        // 2.2 - Si aucune correspondance : renvoyer la page de login avec un message
+        else {
+            echo "Il semble que vous ne soyez pas encore inscrit";
+            displayLoginPage();
+            break;
         }
     }
 }
-

@@ -1,0 +1,13 @@
+<IfModule mod_rewrite.c>
+# Activer la réécriture d'URL
+RewriteEngine On
+
+# Mon url de base
+RewriteBase /autorent/Auto-Rent/
+
+# Si le fichier ou le dossier n'existe pas, rediriger la requête vers index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [L]
+</IfModule>
+

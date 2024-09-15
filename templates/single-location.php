@@ -1,3 +1,6 @@
+<?php session_start();
+var_dump($_SESSION) ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,9 +24,12 @@
     <main>
         <h1>Détail du logement</h1>
         <?php
+
         if ($location_id) {
+            echo ("Location_id => ");
             var_dump($location_id);
         }
+
         ?>
 
 

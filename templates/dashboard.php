@@ -1,3 +1,6 @@
+<?php
+echo "Les données de session dans le template dashboard =>";
+var_dump($_SESSION); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,7 +24,7 @@
     <main>
         <h1>Tableau de bord</h1>
         <?php
-        if ($owner_id) {
+        if ($_SESSION["owner_id"]) {
             echo ("
                 <section>
                     <h2>Mes biens à louer</h2>
@@ -30,7 +33,7 @@
 
             foreach ($locations as $location) {
                 echo ("<div class='location' style='border: 1px solid black;'>
-                                <a href='?location=" . $location["id"] . "'>
+                                <a href='" . BASE_URL . "dashboard?location=" . $location["id"] . "'>
                                 <h3>" . $location["label"] . "</h3>
                                 <p>" . $location["rooms"] . " pièce(s)</p>
 

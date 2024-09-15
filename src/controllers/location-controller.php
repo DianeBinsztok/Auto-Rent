@@ -6,7 +6,7 @@ function getLocationDetail($location_id)
 {
     if ($location_id) {
         $location = getOneLocationDetail($location_id);
-        require("templates/locationDetail.php");
+        require("templates/single-location.php");
     } else {
         echo "Impossible d'accéder aux informations sur ce logement";
     }
