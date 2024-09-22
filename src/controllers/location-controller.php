@@ -8,6 +8,7 @@ if ($_GET["location"]) {
     if (locationBelongsToUser($location_id)) {
         require("templates/single-location.php");
     } else {
+        $_SESSION["message"] = "Vous ne pouvez pas accéder à ce logement";
         header("Location:" . BASE_URL . "/dashboard");
     }
 } else {
