@@ -19,5 +19,5 @@ else {
 /* LISTER TOUS LES BIENS À LOUER DE L'UTILISATEUR */
 function getAllUserLocations($owner_id)
 {
-    return getAllLocations($owner_id);
+    return getAllLocationsForOneUser($owner_id);
 }

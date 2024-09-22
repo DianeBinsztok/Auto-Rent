@@ -18,7 +18,7 @@ function getAllOwners()
 }
 
 // II - Afficher tous les logements à louer d'un propriétaire
-function getAllLocations($owner_id)
+function getAllLocationsForOneUser($owner_id)
 {
     require "env.php";
     try {

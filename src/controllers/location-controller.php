@@ -2,13 +2,30 @@
 require_once('src/model.php');
 
 // Afficher la page de détail d'un logement
-
-/* /!\ VEILLER À CE QUE L'UTILISATEUR NE PUISSE PAS ACCÉDER À UN LOGEMENT DE QUELQU'UN D'AUTRE */
 if ($_GET["location"]) {
     $location_id = $_GET["location"];
-    //Ici : vérifier que location_id fait bien partie des bien de l'utilisateur
     $location = getOneLocationDetail($_GET["location"]);
-    require("templates/single-location.php");
+    if (locationBelongsToUser($location_id)) {
+        require("templates/single-location.php");
+    } else {
+        header("Location:" . BASE_URL . "/dashboard");
+    }
 } else {
     echo "Impossible d'accéder aux informations sur ce logement";
+}
+
+function locationBelongsToUser($location_id)
+{
+    if ($_SESSION["owner_id"]) {
+
+        $usersLocations = getAllLocationsForOneUser($_SESSION["owner_id"]);
+        foreach ($usersLocations as $location) {
+            if ($location["id"] == $location_id) {
+                return true;
+            }
+        }
+        return false;
+    } else {
+        header("Location:/login");
+    }
 }
