@@ -1,43 +1,26 @@
-<?php session_start();
-var_dump($_SESSION) ?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="./assets/stylesheets/style.css" rel="stylesheet" />
-    <link href="./assets/stylesheets/dashboard-style.css" rel="stylesheet" />
-    <title>Autorent</title>
-</head>
-
-<body>
-    <header>
-    </header>
-    <nav>
-        <a href="">Accueil</a>
-        <a href="">Mes biens à louer</a>
-        <a href="">Enregistrer un logement à louer</a>
-        <a href="">Mon profil</a>
-    </nav>
-    <main>
-        <h1>Détail du logement</h1>
-        <?php
-
-        if ($location_id) {
-            echo ("Location_id => ");
-            var_dump($location_id);
-        }
-
-        ?>
+<?php require "partials/header.php"; ?>
 
 
+<?php
 
-    </main>
-    <footer>
+if ($location) {
+    echo (
+        "<h1>" . $location["label"] . "</h1>
+        <ul>
+            <li>Dimentions : 80m2</li>
+            <li>Nombre de pièces habitables : " . $location["rooms"] . "</li>
+        </ul>
+        <h3>Adresse :</h3>
+            <ul>
+                <li>" . $location["street_number"] . " " . $location["street_type"] . " " . $location["street_name"] . "</li>
+                <li>" . $location["postal_code"] . " " . $location["city"] . "</li>
+            </ul>
 
-    </footer>
-</body>
+    ");
+} else {
+    echo "Un problème est survenu. Les informations sur ce logement ne sont pas disponible pour le moment";
+}
 
-</html>
+?>
+
+<?php require "partials/footer.php"; ?>

@@ -1,14 +1,14 @@
 <?php
-echo ("login-controller =>");
+require "templates/login.php";
 require_once 'src/model.php';
 
-/* I - AFFICHAGE DE LA PAGE DE LOGIN */
-function displayLoginPage()
-{
-    require("templates/login.php");
+//RÉCUPÉRER LES INFOS DE L'UTILISATEUR
+if ($_POST["user_email"] && $_POST["user_password"]) {
+    $_SESSION = identifyUserAndCreateSession($_POST["user_email"], $_POST["user_password"]);
+    exit;
 }
 
-/* II - AUTHENTIFICATION UTILISATEUR */
+//AUTHENTIFICATION UTILISATEUR
 function identifyUserAndCreateSession($user_email, $user_password)
 {
 
@@ -30,9 +30,7 @@ function identifyUserAndCreateSession($user_email, $user_password)
 
         // 2.2 - Si aucune correspondance : renvoyer la page de login avec un message
         else {
-            echo "Il semble que vous ne soyez pas encore inscrit";
-            displayLoginPage();
-            break;
+            header("Location: login");
         }
     }
 }

@@ -52,10 +52,6 @@ $date = getMonthAndYear();
 $firstDateOfMonth = getMonthInterval()[0];
 $lastDateOfMonth = getMonthInterval()[1];
 
-
-
-
-
 //Rent
 $base_rent;
 $charges;
