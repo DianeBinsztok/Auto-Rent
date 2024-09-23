@@ -5,6 +5,7 @@ require_once 'src/model.php';
 //RÉCUPÉRER LES INFOS DE L'UTILISATEUR
 if ($_POST["user_email"] && $_POST["user_password"]) {
     $_SESSION = identifyUserAndCreateSession($_POST["user_email"], $_POST["user_password"]);
+    header("Location:" . BASE_URL . "/dashboard");
     exit;
 }
 
@@ -30,7 +31,7 @@ function identifyUserAndCreateSession($user_email, $user_password)
 
         // 2.2 - Si aucune correspondance : renvoyer la page de login avec un message
         else {
-            header("Location: login");
+            header("Location:" . BASE_URL . "/login");
         }
     }
 }

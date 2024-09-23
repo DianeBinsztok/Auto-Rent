@@ -1,4 +1,6 @@
-<?php require "partials/header.php"; ?>
+<?php
+require "partials/header.php";
+?>
 
 <h1>Tableau de bord</h1>
 <?php if (isset($_SESSION["message"])) {

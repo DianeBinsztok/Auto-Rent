@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 define("BASE_URL", dirname($_SERVER['SCRIPT_NAME']));
 define("REQUESTED_URI", str_replace(BASE_URL, '', $_SERVER['REQUEST_URI']));
 
@@ -35,7 +36,6 @@ if (array_key_exists(REQUESTED_URI, $routes)) {
 
         // POUR LES ROUTES RÉSERVÉES AUX UTILISATEURS IDENTIFIÉS
         require "src/middlewares/authentification-mw.php";
-        $firstRequestedUri = REQUESTED_URI;
         authMiddleware();
         require $request_uri["controller"];
 
