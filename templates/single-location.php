@@ -18,7 +18,10 @@ if ($location) {
 
     ");
 } else {
-    echo "Un problème est survenu. Les informations sur ce logement ne sont pas disponible pour le moment";
+    echo "
+        <h1>Un problème est survenu.</h1>
+        <p>Les informations sur ce logement ne sont pas disponible pour le moment<p>
+    ";
 }
 
 ?>

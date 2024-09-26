@@ -7,6 +7,7 @@ require "partials/header.php";
     echo "<p id='message'>" . $_SESSION["message"] . "</p>";
     unset($_SESSION['message']);
 } ?>
+
 <?php
 if ($_SESSION["owner_id"]) {
     echo ("
@@ -17,7 +18,7 @@ if ($_SESSION["owner_id"]) {
 
     foreach ($locations as $location) {
         echo ("<div class='location' style='border: 1px solid black;'>
-                                <a href='" . BASE_URL . "/dashboard?location=" . $location["id"] . "'>
+                                <a href='" . BASE_URL . "/dashboard/location?location=" . $location["id"] . "'>
                                 <h3>" . $location["label"] . "</h3>
                                 <p>" . $location["rooms"] . " pièce(s)</p>
 

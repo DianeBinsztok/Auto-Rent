@@ -1,7 +1,7 @@
 <?php require "partials/header.php"; ?>
 
 <h1>Enregistrer un bien</h1>
-<form action="">
+<form method="post" action=<?php echo BASE_URL . "/dashboard/new-location" ?>>
     <?
     //libellé - texte
     // Adresse : 
@@ -17,14 +17,14 @@
     // Loué ou pas - bool
     // si loué : nom et email du-des locataire.s - texte
     ?>
-    <label for="name">Libellé du logement: </label>
-    <input type="text" name="name" id="name" placeholder="Ex: T5 rue Victor Hugo" required />
+    <label for="location_title">Libellé du logement: </label>
+    <input type="text" name="location-title" placeholder="Ex: T5 rue Victor Hugo" />
     <section class="add-location-section" id="adress-container">
         <h2>Adresse du logement :</h2>
-        <label for="name">N° de voie: </label>
-        <input type="text" name="name" id="name" placeholder="Ex: 25 bis" required />
-        <label for="name">Type de voie: </label>
-        <select name="">
+        <label for="location_street-number">N° de voie: </label>
+        <input type="text" name="location_street-number" placeholder="Ex: 25 bis" />
+        <label for="location_street-type">Type de voie: </label>
+        <select name="location_street-type">
             <option value="allee">Allée</option>
             <option value="avenue">Avenue</option>
             <option value="boulevard">Boulevard</option>
@@ -42,21 +42,21 @@
             <option value="ruelle">Ruelle</option>
             <option value="square">Square</option>
         </select>
-        <label for="name">Nom de voie: </label>
-        <input type="text" name="name" id="name" placeholder="Ex: Gambetta" required />
-        <label for="name">Code postal: </label>
-        <input type="text" name="name" id="name" placeholder="Ex: 75001" required />
-        <label for="name">Ville ou localité: </label>
-        <input type="text" name="name" id="name" placeholder="Ex: Paris" required />
+        <label for="location_street-name">Nom de voie: </label>
+        <input type="text" name="location_street-name" placeholder="Ex: Gambetta" />
+        <label for="location_postal-code">Code postal: </label>
+        <input type="text" name="location_postal-code" placeholder="Ex: 75001" />
+        <label for="location_city">Ville ou localité: </label>
+        <input type="text" name="location_city" placeholder="Ex: Paris" />
     </section>
     <section class="add-location-section" id="informations-container">
         <h2>Informations sur le logement:</h2>
-        <label for="name">Surface habitable, en m²: </label>
-        <input type="number" name="name" id="name" required />
+        <label for="location_surface">Surface habitable, en m²: </label>
+        <input type="number" name="location_surface" />
         <p>m²</p>
-        <label for="name">Nombre de pièces: </label>
-        <input type="number" name="name" id="name" required />
-        <label for="name">Classe énergétique: </label>
+        <label for="location_nb-of-rooms">Nombre de pièces: </label>
+        <input type="number" name="location_energy-class" />
+        <label for="location_energy-class">Classe énergétique: </label>
         <select name="">
             <option value="a">A</option>
             <option value="b">B</option>
@@ -67,18 +67,18 @@
             <option value="g">G</option>
         </select>
 
-        <label for="name">Meublé: </label>
-        <input type="radio">
+        <label for="location_furnished">Meublé: </label>
+        <input type="radio" name="location_furnished">
 
-        <label for="name">Loué: </label>
-        <input type="radio">
+        <label for="location_rented">Loué: </label>
+        <input type="radio" name="location_rented">
     </section>
     <section class="add-location-section" id="tenant-info-container">
         <h2>Information sur les locataires</h2>
         <label for="name">Nom du/des locataire.s: </label>
-        <input type="text">
+        <input type="text" name="location_tenant-name">
         <label for="name">Email du/des locataire.s: </label>
-        <input type="email">
+        <input type="email" name="location_tenant-email">
     </section>
     <button>Enregistrer</button>
 </form>
