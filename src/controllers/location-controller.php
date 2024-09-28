@@ -25,6 +25,9 @@ switch ($template) {
     // III - NEW LOCATION : enregistrer un nouveau logement
     case 'templates/new-location.php':
         require $template;
+        if ($_POST) {
+            newLocation($_POST);
+        }
         break;
 
     // AUTRE
@@ -69,4 +72,13 @@ function getDetailsOnRequiredLocation($location_id)
         $_SESSION["message"] = "Vous ne pouvez pas accéder à ce logement";
         header("Location:" . BASE_URL . "/dashboard");
     }
+}
+
+// III - NEW-LOCATION : enregistrer un nouveau logement
+function newLocation(array $newLocationData)
+{
+    // Convertir les champs 'location_furnished' et 'location_rented' en booléens avant insertion en base de données
+    $newLocationData['location_furnished'] = isset($newLocationData['location_furnished']) ? 1 : 0;
+    $newLocationData['location_rented'] = isset($newLocationData['location_rented']) ? 1 : 0;
+    createNewLocation($newLocationData);
 }

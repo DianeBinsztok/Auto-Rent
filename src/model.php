@@ -1,5 +1,5 @@
 <?php
-//I - Authentification utilisateur
+//I - Authentification utilisateur - requêter tous les utilisateurs enregistrés
 function getAllOwners()
 {
     require "env.php";
@@ -53,6 +53,43 @@ function getOneLocationDetail($location_id)
     }
 }
 
+// IV - Enregistrer un nouveau logement
+function createNewLocation(array $locationData)
+{
+    require "env.php";
+    try {
+        $database = new PDO($db . ':host=' . $db_host . ';dbname=' . $db_name . ';charset=' . $db_charset, $db_user, $db_pw);
+
+        $statement = $database->prepare(
+            "INSERT INTO locations (label, street_number, street_type, street_name, additional_adress_info, postal_code, city, surface, nb_of_rooms, energy_class, furnished, rent, rented, owner_id)
+            VALUES (:location_label, :location_street_number, :location_street_type, :location_street_name, :location_additional_adress_info, :location_postal_code, :location_city, :location_surface, :location_nb_of_rooms, :location_energy_class, :location_furnished, :location_rent, :location_rented, :location_owner_id)"
+        );
+
+        $statement->execute([
+            'location_label' => $locationData['location_label'],
+            'location_street_number' => $locationData['location_street_number'],
+            'location_street_type' => $locationData['location_street_type'],
+            'location_street_name' => $locationData['location_street_name'],
+            'location_additional_adress_info' => $locationData['location_additional_adress_info'] ?? null, // Optionnel
+            'location_postal_code' => $locationData['location_postal_code'],
+            'location_city' => $locationData['location_city'],
+            'location_surface' => $locationData['location_surface'],
+            'location_nb_of_rooms' => $locationData['location_nb_of_rooms'],
+            'location_energy_class' => $locationData['location_energy_class'],
+            'location_furnished' => $locationData['location_furnished'],
+            'location_rent' => $locationData['location_rent'],
+            'location_rented' => $locationData['location_rented'],
+            'location_owner_id' => $locationData['location_owner_id']
+        ]);
+
+        $newLocationId = $database->lastInsertId();
+        return $newLocationId;
+
+    } catch (Exception $e) {
+        echo ("Impossible d'ajouter cette location");
+        die('Erreur : ' . $e->getMessage());
+    }
+}
 
 /*
 // Afficher les données sur un locataire

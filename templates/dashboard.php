@@ -20,7 +20,7 @@ if ($_SESSION["owner_id"]) {
         echo ("<div class='location' style='border: 1px solid black;'>
                                 <a href='" . BASE_URL . "/dashboard/location?location=" . $location["id"] . "'>
                                 <h3>" . $location["label"] . "</h3>
-                                <p>" . $location["rooms"] . " pièce(s)</p>
+                                <p>" . $location["nb_of_rooms"] . " pièce(s)</p>
 
                                 <h3>Adresse :</h3>
                                 <p>" . $location["street_number"] . " " . $location["street_type"] . " " . $location["street_name"] . "</p>

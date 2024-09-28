@@ -17,14 +17,14 @@
     // Loué ou pas - bool
     // si loué : nom et email du-des locataire.s - texte
     ?>
-    <label for="location_title">Libellé du logement: </label>
-    <input type="text" name="location-title" placeholder="Ex: T5 rue Victor Hugo" />
+    <label for="location_label">Libellé du logement: </label>
+    <input type="text" name="location_label" placeholder="Ex: T5 rue Victor Hugo" />
     <section class="add-location-section" id="adress-container">
         <h2>Adresse du logement :</h2>
-        <label for="location_street-number">N° de voie: </label>
-        <input type="text" name="location_street-number" placeholder="Ex: 25 bis" />
-        <label for="location_street-type">Type de voie: </label>
-        <select name="location_street-type">
+        <label for="location_street_number">N° de voie: </label>
+        <input type="text" name="location_street_number" placeholder="Ex: 25 bis" />
+        <label for="location_street_type">Type de voie: </label>
+        <select name="location_street_type">
             <option value="allee">Allée</option>
             <option value="avenue">Avenue</option>
             <option value="boulevard">Boulevard</option>
@@ -42,10 +42,10 @@
             <option value="ruelle">Ruelle</option>
             <option value="square">Square</option>
         </select>
-        <label for="location_street-name">Nom de voie: </label>
-        <input type="text" name="location_street-name" placeholder="Ex: Gambetta" />
-        <label for="location_postal-code">Code postal: </label>
-        <input type="text" name="location_postal-code" placeholder="Ex: 75001" />
+        <label for="location_street_name">Nom de voie: </label>
+        <input type="text" name="location_street_name" placeholder="Ex: Gambetta" />
+        <label for="location_postal_code">Code postal: </label>
+        <input type="text" name="location_postal_code" placeholder="Ex: 75001" />
         <label for="location_city">Ville ou localité: </label>
         <input type="text" name="location_city" placeholder="Ex: Paris" />
     </section>
@@ -54,10 +54,10 @@
         <label for="location_surface">Surface habitable, en m²: </label>
         <input type="number" name="location_surface" />
         <p>m²</p>
-        <label for="location_nb-of-rooms">Nombre de pièces: </label>
-        <input type="number" name="location_energy-class" />
-        <label for="location_energy-class">Classe énergétique: </label>
-        <select name="">
+        <label for="location_nb_of_rooms">Nombre de pièces: </label>
+        <input type="number" name="location_nb_of_rooms" />
+        <label for="location_energy_class">Classe énergétique: </label>
+        <select name="location_energy_class">
             <option value="a">A</option>
             <option value="b">B</option>
             <option value="c">C</option>
@@ -68,10 +68,14 @@
         </select>
 
         <label for="location_furnished">Meublé: </label>
-        <input type="radio" name="location_furnished">
+        <input type="checkbox" name="location_furnished" />
+        <label for="location_rent">Montant du loyer: </label>
+        <input type="number" name="location_rent" />
 
         <label for="location_rented">Loué: </label>
-        <input type="radio" name="location_rented">
+        <input type="checkbox" name="location_rented" />
+
+        <input type="hidden" name="location_owner_id" value=<?= $_SESSION["owner_id"] ?>>
     </section>
     <section class="add-location-section" id="tenant-info-container">
         <h2>Information sur les locataires</h2>
