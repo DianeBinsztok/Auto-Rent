@@ -63,7 +63,7 @@ function locationBelongsToUser($location_id)
         header("Location:/login");
     }
 }
-// II-1 - Renvoyer les informations sur un logement
+// II-2 - Renvoyer les informations sur un logement
 function getDetailsOnRequiredLocation($location_id)
 {
     if (locationBelongsToUser($location_id)) {
@@ -75,15 +75,13 @@ function getDetailsOnRequiredLocation($location_id)
     }
 }
 
-
-// II - 2 - Renvoyer les charges qui concernent un logement
+// II-3 - Renvoyer les charges qui concernent un logement
 
 function getChargesForAGivenLocation($location_id)
 {
     $charges = getChargesByLocation($location_id);
     return $charges;
 }
-
 
 // III - NEW-LOCATION : enregistrer un nouveau logement
 function newLocation(array $newLocationData)

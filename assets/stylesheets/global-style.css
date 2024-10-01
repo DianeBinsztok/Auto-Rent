@@ -9,6 +9,7 @@ body{
 }
 main{
     margin-top: 10%;
+    width: 100%;
 }
 h1, .highlight{
     font-weight: bold;
