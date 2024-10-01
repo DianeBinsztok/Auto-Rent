@@ -25,6 +25,7 @@
         <input type="text" name="location_street_number" placeholder="Ex: 25 bis" />
         <label for="location_street_type">Type de voie: </label>
         <select name="location_street_type">
+            <option value="aucun">Aucun</option>
             <option value="allee">Allée</option>
             <option value="avenue">Avenue</option>
             <option value="boulevard">Boulevard</option>

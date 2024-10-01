@@ -1,7 +1,6 @@
 <?php require "partials/header.php"; ?>
 <?php
 if ($location) {
-    //var_dump($location);
 
     //Titre
     $label = isset($location["location_label"]) ? $location["location_label"] : "Pas de libellé";
@@ -54,7 +53,6 @@ if ($location) {
 
 <section>
     <h2>Caractéristiques :</h2>
-
     <table>
         <tbody>
             <tr>
@@ -75,30 +73,8 @@ if ($location) {
             </tr>
         </tbody>
     </table>
-
-
-    <!--
-    <p><span>Surface habitable</span> : <?= $surface ?></p>
-    <p><span>Score DPE</span> : <?= $energyScore ?></p>
-
-    <?php
-    if ($location["furnished"]) {
-        echo "<p><span>Meublé</span></p>";
-    } else {
-        echo "<p><span>Non meublé</span></p>";
-    }
-    ?>
-
-    <?php
-    if ($location["rented"]) {
-        echo "<p><span>Actuellement loué</span></p>";
-    } else {
-        echo "<p><span>Disponible pour location</span></p>";
-    }
-    ?>
-    -->
-
 </section>
+
 <section>
     <h2>Loyer et charges :</h2>
 
@@ -116,58 +92,28 @@ if ($location) {
 
                 foreach ($charges as $charge) {
                     echo "
-                                <tr>
-                                    <th>" . $charge["charge_label"] . "</th>
-                                    <td>" . $charge["charge_amount"] . " €</td>
-                                </tr>
-                                ";
+                        <tr>
+                            <th>" . $charge["charge_label"] . "</th>
+                                <td>" . $charge["charge_amount"] . " €</td>
+                        </tr>
+                        ";
                 }
                 echo "</td>
-                        </tr>";
-                /*
-    foreach ($charges as $charge) {
-        echo "
-            <tr>
-                <th>" . $charge["charge_label"] . "</th>
-                <td>" . $charge["charge_amount"] . "</td>
-            </tr>
-            ";
-    }
-            */
-                echo "
-                <tfoot>
-                        <tr>
-      <th>Montant total :</th>
-      <td>" . $rent . "</td>
-    </tr>
-                </tfoot>
-            ";
+                        </tr>                
+                        <tfoot>
+                            <tr>
+                                <th>Montant total :</th>
+                                <td>" . $totalAmount . " €</td>
+                            </tr>
+                        </tfoot>";
             }
             ?>
         </tbody>
     </table>
-
-    <!--
-    <p><span>Loyer</span> : <?= $rent ?></p>
-    <p><span>Charges</span> :
-        <?php
-        if ($charges && count($charges) > 0) {
-            echo "<ul>";
-            foreach ($charges as $charge) {
-                echo "<li><span>" . $charge["charge_label"] . "</span> :" . $charge["charge_amount"] . "€</li>";
-            }
-            echo "</ul>";
-        } else {
-            echo "non spécifiées";
-        }
-
-        ?>
-    </p>
-    -->
 </section>
+
 <section>
     <h2>Locataire(s) :</h2>
-
     <table>
         <tbody>
             <tr>
@@ -192,18 +138,6 @@ if ($location) {
             </tr>
         </tbody>
     </table>
-
-    <!--
-    <p><span>Locataire(s) depuis</span> : <?= $tenantSince ?></p>
-    <p><span>Nom(s)</span> : <?= $tenantName ?></p>
-    <p><span>Email</span> :<?= $tenantEmail ?></p>
-    <p><span>N° de téléphone</span> :<?= $tenantPhoneNb ?></p>
-    --
-
-
->
-
-
 </section>
 
 

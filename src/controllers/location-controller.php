@@ -16,6 +16,7 @@ switch ($template) {
         if ($_GET["location"]) {
             $location = getDetailsOnRequiredLocation($_GET["location"]);
             $charges = getChargesForAGivenLocation($_GET["location"]);
+            $totalAmount = addRentAndCharges($location["location_rent"], $charges);
             require $template;
             break;
         } else {
@@ -76,13 +77,21 @@ function getDetailsOnRequiredLocation($location_id)
 }
 
 // II-3 - Renvoyer les charges qui concernent un logement
-
 function getChargesForAGivenLocation($location_id)
 {
     $charges = getChargesByLocation($location_id);
     return $charges;
 }
+//II-4 - Additionner les charges et le loyer
+function addRentAndCharges($rent, $charges)
+{
+    $totalAmount = floatval($rent);
 
+    foreach ($charges as $charge) {
+        $totalAmount += floatval($charge["charge_amount"]);
+    }
+    return $totalAmount;
+}
 // III - NEW-LOCATION : enregistrer un nouveau logement
 function newLocation(array $newLocationData)
 {
