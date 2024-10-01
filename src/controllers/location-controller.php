@@ -15,6 +15,7 @@ switch ($template) {
 
         if ($_GET["location"]) {
             $location = getDetailsOnRequiredLocation($_GET["location"]);
+            $charges = getChargesForAGivenLocation($_GET["location"]);
             require $template;
             break;
         } else {
@@ -53,7 +54,7 @@ function locationBelongsToUser($location_id)
 
         $usersLocations = getAllLocationsForOneUser($_SESSION["owner_id"]);
         foreach ($usersLocations as $location) {
-            if ($location["id"] == $location_id) {
+            if ($location["location_id"] == $location_id) {
                 return true;
             }
         }
@@ -73,6 +74,16 @@ function getDetailsOnRequiredLocation($location_id)
         header("Location:" . BASE_URL . "/dashboard");
     }
 }
+
+
+// II - 2 - Renvoyer les charges qui concernent un logement
+
+function getChargesForAGivenLocation($location_id)
+{
+    $charges = getChargesByLocation($location_id);
+    return $charges;
+}
+
 
 // III - NEW-LOCATION : enregistrer un nouveau logement
 function newLocation(array $newLocationData)

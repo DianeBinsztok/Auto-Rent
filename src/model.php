@@ -24,7 +24,7 @@ function getAllLocationsForOneUser($owner_id)
     try {
         $database = new PDO($db . ':host=' . $db_host . ';dbname=' . $db_name . ';charset=' . $db_charset, $db_user, $db_pw);
         $statement = $database->query(
-            "SELECT * from locations WHERE owner_id =" . intval($owner_id, 10) . " ;"
+            "SELECT * from locations WHERE location_fk_owner_id =" . intval($owner_id, 10) . " ;"
         );
         $allLocations = $statement->fetchAll();
         return $allLocations;
@@ -36,22 +36,49 @@ function getAllLocationsForOneUser($owner_id)
 }
 
 // III - Afficher le détail d'un logement à louer
+// III-1 - Le logement et les locataires
+
 function getOneLocationDetail($location_id)
 {
     require "env.php";
     try {
         $database = new PDO($db . ':host=' . $db_host . ';dbname=' . $db_name . ';charset=' . $db_charset, $db_user, $db_pw);
         $statement = $database->query(
-            "SELECT * from locations WHERE locations.id =" . intval($location_id, 10) . " ;"
+            "SELECT * FROM locations
+            LEFT JOIN tenants ON tenant_fk_location_id = locations.location_id
+            WHERE locations.location_id =" . intval($location_id, 10) . " ;"
         );
-        $LocationDetail = $statement->fetch();
-        return $LocationDetail;
+
+        $location = $statement->fetch();
+        return $location;
 
     } catch (Exception $e) {
         echo ("Impossible d'accéder aux données de ce logement");
         die('Erreur : ' . $e->getMessage());
     }
 }
+
+
+// III-2 - Les charges concernant le logement
+
+function getChargesByLocation($location_id)
+{
+    require "env.php";
+    try {
+        $database = new PDO($db . ':host=' . $db_host . ';dbname=' . $db_name . ';charset=' . $db_charset, $db_user, $db_pw);
+
+        $statement = $database->query(
+            "SELECT * FROM charges WHERE charges.charge_fk_location_id =" . intval($location_id, 10) . " ;"
+        );
+        $charges = $statement->fetchAll();
+        return $charges;
+
+    } catch (Exception $e) {
+        echo ("Impossible d'accéder aux données de ce logement");
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
 
 // IV - Enregistrer un nouveau logement
 function createNewLocation(array $locationData)
@@ -61,7 +88,7 @@ function createNewLocation(array $locationData)
         $database = new PDO($db . ':host=' . $db_host . ';dbname=' . $db_name . ';charset=' . $db_charset, $db_user, $db_pw);
 
         $statement = $database->prepare(
-            "INSERT INTO locations (label, street_number, street_type, street_name, additional_adress_info, postal_code, city, surface, nb_of_rooms, energy_class, furnished, rent, rented, owner_id)
+            "INSERT INTO locations (location_label, location_street_number, location_street_type, location_street_name, location_additional_adress_info, location_postal_code, location_city, location_surface, location_nb_of_rooms, location_energy_class, location_furnished, location_rent, location_rented, location_fk_owner_id)
             VALUES (:location_label, :location_street_number, :location_street_type, :location_street_name, :location_additional_adress_info, :location_postal_code, :location_city, :location_surface, :location_nb_of_rooms, :location_energy_class, :location_furnished, :location_rent, :location_rented, :location_owner_id)"
         );
 

@@ -1,32 +1,41 @@
 <?php require "partials/header.php"; ?>
 <?php
+//var_dump($charges);
 if ($location) {
+
     //Titre
-    $label = isset($location["label"]) ? $location["label"] : "Pas de libellé";
+    $label = isset($location["location_label"]) ? $location["location_label"] : "Pas de libellé";
 
     //Adresse
-    $streetNb = isset($location["street_number"]) ? $location["street_number"] : "n° de voie non spécifié";
-    $streetType = isset($location["street_type"]) ? $location["street_type"] : "type de voie non spécifié";
-    $streetName = isset($location["street_name"]) ? $location["street_name"] : "nom de voie non spécifié";
-    $postalCode = isset($location["postal_code"]) ? $location["postal_code"] : "code postal non spécifié";
-    $city = isset($location["city"]) ? $location["city"] : "Localité non spécifiée";
-    $additionAdressInfo = $location["additional_adress_info"];
+    $streetNb = isset($location["location_street_number"]) ? $location["location_street_number"] : "(n° de voie non spécifié)";
+    $streetType = isset($location["location_street_type"]) ? $location["location_street_type"] : "(type de voie non spécifié)";
+    $streetName = isset($location["location_street_name"]) ? $location["location_street_name"] : "(nom de voie non spécifié)";
+    $postalCode = isset($location["location_postal_code"]) ? $location["location_postal_code"] : "(code postal non spécifié)";
+    $city = isset($location["location_city"]) ? $location["location_city"] : "(Localité non spécifiée)";
+    $additionAdressInfo = $location["location_additional_adress_info"];
 
     //Caractéristiques
-    $surface = isset($location["surface"]) ? $location["surface"] : "non spécifié";
-    $nbOfRooms = isset($location["nb_of_rooms"]) ? $location["nb_of_rooms"] : "non spécifié";
-    $energyScore = isset($location["energy_score"]) ? $location["energy_score"] : "non spécifié";
-
-    $furnished = isset($newLocationData['furnished']) ? 1 : 0;
-    $rented = isset($location["rented"]) ? 1 : 0;
+    $surface = isset($location["location_surface"]) ? $location["location_surface"] : "non spécifiée";
+    $nbOfRooms = isset($location["location_nb_of_rooms"]) ? $location["location_nb_of_rooms"] : "non spécifié";
+    $energyScore = isset($location["location_energy_score"]) ? strtoupper($location["location_energy_score"]) : "non spécifié";
+    $furnished = isset($newLocationData['location_furnished']) ? 1 : 0;
+    $rented = isset($location["location_rented"]) ? 1 : 0;
 
     //Loyer & charges
-    $rent = $location["rent"] > 0 ? $location["rent"] . "€" : "non spécifié";
-    $charges = isset($location["charges"]) ? $location["charges"] : [];
-
+    $rent = $location["location_rent"] > 0 ? $location["location_rent"] . " €" : "non spécifié";
+    /*
+    if (isset($location["charges"])) {
+        $charges = [];
+    } else {
+        $charges = "aucune";
+    }
+*/
     //Locataire(s)
+    $tenantSince = isset($location["tenant_since_date"]) ? $location["tenant_since_date"] : " date non spécifiée";
     $tenantName = isset($location["tenant_name"]) ? $location["tenant_name"] : "non spécifié";
     $tenantEmail = isset($location["tenant_email"]) ? $location["tenant_email"] : "non spécifié";
+    $tenantPhoneNb = isset($location["tenant_phone_number"]) ? $location["tenant_phone_number"] : "non spécifié";
+
 } else {
     echo "
         <h1>Un problème est survenu.</h1>
@@ -38,71 +47,69 @@ if ($location) {
 <h1><?= $label ?></h1>
 <section>
     <h2>Adresse :</h2>
-    <ul>
-        <li><?= $streetNb . " " . $streetType . " " . $streetName ?></li>
+    <p><?= $streetNb . " " . $streetType . " " . $streetName ?></p>
 
-        <?php
-        if (isset($additionAdressInfo)) {
-            echo "<li>" . $additionAdressInfo . "</li>";
-        }
-        ?>
+    <?php
+    if (isset($additionAdressInfo)) {
+        echo "<p>" . $additionAdressInfo . "</p>";
+    }
+    ?>
 
-        <li><?= $postalCode . " " . $city ?></li>
+    <p><?= $postalCode . " " . $city ?></p>
 
-    </ul>
+
 
 </section>
 <section>
     <h2>Caractéristiques :</h2>
-    <ul>
-        <li><span>Surface habitable</span> : <?= $surface ?></li>
-        <li><span>Score DPE</span> :<?= $energyScore ?></li>
+    <p><span>Surface habitable</span> : <?= $surface ?></p>
+    <p><span>Score DPE</span> : <?= $energyScore ?></p>
 
-        <?php
-        if ($location["furnished"]) {
-            echo "<li><span>Meublé</span></li>";
-        } else {
-            echo "<li><span>Non meublé</span></li>";
-        }
-        ?>
+    <?php
+    if ($location["furnished"]) {
+        echo "<p><span>Meublé</span></p>";
+    } else {
+        echo "<p><span>Non meublé</span></p>";
+    }
+    ?>
 
-        <?php
-        if ($location["rented"]) {
-            echo "<li><span>Actuellement loué</span></li>";
-        } else {
-            echo "<li><span>Disponible pour location</span></li>";
-        }
-        ?>
-
-    </ul>
+    <?php
+    if ($location["rented"]) {
+        echo "<p><span>Actuellement loué</span></p>";
+    } else {
+        echo "<p><span>Disponible pour location</span></p>";
+    }
+    ?>
 </section>
 <section>
     <h2>Loyer et charges :</h2>
-    <ul>
-        <li><span>Loyer</span> : <?= $rent ?></li>
-        <li><span>Charges</span> :
-            <?php
-            if (count($charges) > 0) {
-                echo "<ul>";
-                foreach ($charges as $charge) {
-                    echo "<li><span>" . $charge["libellé"] . "</span> :" . $charge["montant"] . "€</li>";
-                }
-                echo "</ul>";
-            } else {
-                echo "non spécifiées";
-            }
 
-            ?>
-        </li>
-    </ul>
+    <p><span>Loyer</span> : <?= $rent ?></p>
+    <p><span>Charges</span> :
+        <?php
+        if ($charges && count($charges) > 0) {
+            echo "<ul>";
+            foreach ($charges as $charge) {
+                echo "<li><span>" . $charge["charge_label"] . "</span> :" . $charge["charge_amount"] . "€</li>";
+            }
+            echo "</ul>";
+        } else {
+            echo "non spécifiées";
+        }
+
+        ?>
+    </p>
+
 </section>
 <section>
     <h2>Locataire(s) :</h2>
-    <ul>
-        <li><span>Locataire(s) depuis</span> : 10/2024</li>
-        <li><span>Nom(s)</span> :<?= $tenantName ?></li>
-        <li><span>Email</span> :<?= $tenantEmail ?></li>
-    </ul>
+
+    <p><span>Locataire(s) depuis</span> : <?= $tenantSince ?></p>
+    <p><span>Nom(s)</span> : <?= $tenantName ?></p>
+    <p><span>Email</span> :<?= $tenantEmail ?></p>
+    <p><span>N° de téléphone</span> :<?= $tenantPhoneNb ?></p>
+
+
 </section>
 
 

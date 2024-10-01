@@ -18,13 +18,13 @@ if ($_SESSION["owner_id"]) {
 
     foreach ($locations as $location) {
         echo ("<div class='location' style='border: 1px solid black;'>
-                                <a href='" . BASE_URL . "/dashboard/location?location=" . $location["id"] . "'>
-                                <h3>" . $location["label"] . "</h3>
-                                <p>" . $location["nb_of_rooms"] . " pièce(s)</p>
+                                <a href='" . BASE_URL . "/dashboard/location?location=" . $location["location_id"] . "'>
+                                <h3>" . $location["location_label"] . "</h3>
+                                <p>" . $location["location_nb_of_rooms"] . " pièce(s)</p>
 
                                 <h3>Adresse :</h3>
-                                <p>" . $location["street_number"] . " " . $location["street_type"] . " " . $location["street_name"] . "</p>
-                                <p>" . $location["postal_code"] . " " . $location["city"] . "</p>
+                                <p>" . $location["location_street_number"] . " " . $location["location_street_type"] . " " . $location["location_street_name"] . "</p>
+                                <p>" . $location["location_postal_code"] . " " . $location["location_city"] . "</p>
                                 </a>
                             </div>");
     }
