@@ -15,21 +15,7 @@
         <button type="submit">Je m'identifie</button>
     </form>
 
-    <form id="register-form" method="post">
-        <p>Pas encore inscrit?</p>
-        <h2>Inscrivez-vous ici</h2>
-        <label for="name">Votre nom</label>
-        <input name="name" type="text">
-
-        <label for="email">Votre email</label>
-        <input name="email" type="email">
-
-        <label for="password">Votre mot de passe</label>
-        <input name="password" type="password" id="password" required>
-
-        <label for="confirm_password">Confirmez votre mot de passe</label>
-        <input name="confirm_password" type="password" id="confirm_password" required>
-        <button id="subscribe_btn" type="submit" onclick="check();">Je m'inscris</button>
-    </form>
+    <p>Pas encore inscrit?</p>
+    <a href="<?= BASE_URL . "/register" ?>">Inscrivez-vous en quelques clics</a>
 </div>
 <?php require "partials/footer.php"; ?>

@@ -17,9 +17,8 @@ function userIsAuthentified($user_email, $user_password)
 
     // 2 - Chercher une correspondance avec les données de l'utilisateur récupérées en $_POST
     foreach ($ownersList as $owner) {
-
         // Si on trouve une correspondance : créer une session utilisateur
-        if ($owner['email'] == $user_email && $owner['password'] == $user_password) {
+        if ($owner['owner_email'] == $user_email && $owner['owner_password'] == $user_password) {
             return $owner;
         }
         // Sinon : retourner false par défaut
@@ -35,8 +34,8 @@ function identifyUserAndCreateSession($user_email, $user_password)
 
         session_start();
         $_SESSION["session_id"] = session_id();
-        $_SESSION["owner_id"] = $owner['id'];
-        $_SESSION["owner_email"] = $owner['email'];
+        $_SESSION["owner_id"] = $owner['owner_id'];
+        $_SESSION["owner_email"] = $owner['owner_email'];
         return $_SESSION;
     }
 

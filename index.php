@@ -15,6 +15,8 @@ $routes = [
 
     "/login" => ["restricted" => false, "controller" => "src/controllers/login-controller.php", "template" => "templates/login.php", "mTitle" => "Identifiez-vous - Autorent", "mDesc" => "Identifiez-vous ou enregistrez-vous", "stylesheet" => "/assets/stylesheets/specific-styles/login-register-style.css"],
 
+    "/register" => ["restricted" => false, "controller" => "src/controllers/register-controller.php", "template" => "templates/register.php", "mTitle" => "Enregistrez-vous - Autorent", "mDesc" => "Enregistrez-vous", "stylesheet" => "/assets/stylesheets/specific-styles/login-register-style.css"],
+
     "/404" => ["restricted" => false, "controller" => "src/controllers/404-controller.php", "template" => "templates/404.php", "mTitle" => "Autorent", "mDesc" => "Bienvenue sur Autorent", "stylesheet" => "/assets/stylesheets/specific-styles/404-style.css"],
 
     // Pages réservées au utilisateurs identifiés
