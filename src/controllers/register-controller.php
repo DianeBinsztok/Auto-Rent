@@ -1,17 +1,43 @@
 <?php
-require "templates/register.php";
-require_once 'src/model.php';
+require $template;
+require_once "src/model.php";
+require "session-controller.php";
 
 // SI LE FORMULAIRE EST ENVOYÉ: VÉRIFIER LES INFORMATIONS AVANT DE CRÉER L'UTILISTEUR
 if ($_POST) {
+
 
     // Chercher les erreurs
     $errors = checkNewUserRegistration($_POST);
 
     // Si le tableau d'erreurs est vide : créer un nouvel utilisateur
     if (!$errors) {
-        $_SESSION["message"] = "Création de votre compte ...";
-        /* PUT une nouvelle ligne dans la table 'owners' ...*/
+
+        //PUT une nouvelle ligne dans la table 'owners'
+        $newOwnerData["owner_name"] = $_POST["new_user_name"];
+        $newOwnerData["owner_email"] = $_POST["new_user_email"];
+        $newOwnerData["owner_password"] = $_POST["new_user_password"];
+        $newOwnerId = createNewOwner($newOwnerData);
+
+        if ($newOwnerId) {
+            $_SESSION = createSession($newOwnerId, $newOwnerData["owner_email"]);
+
+            if ($_SESSION) {
+                $_SESSION["message"] = "Bienvenue sur votre dashboard!";
+                header("Location:" . BASE_URL . "/dashboard");
+                exit;
+            } else {
+                $_SESSION["message"] = "Une erreur est survenue, la session utilisateur n'a pas pu être créée";
+                header("Location:" . BASE_URL . "/register");
+                exit;
+            }
+
+        } else {
+            $_SESSION["message"] = "Une erreur est survenue, votre compte n'a pas pu être créé";
+            header("Location:" . BASE_URL . "/register");
+            exit;
+        }
+
     }
     // Sinon : afficher les erreurs
     else {
@@ -22,8 +48,10 @@ if ($_POST) {
         }
         $_SESSION["message"] .= "</ul>";
         header("Location:" . BASE_URL . "/register");
+        exit;
     }
 }
+
 
 // VÉRIFIER LES INFORMATIONS ENVOYÉES ET RENVOYER LES ERREURS
 function checkNewUserRegistration($post)

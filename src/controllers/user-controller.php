@@ -1,3 +1,2 @@
 <?php
-
-require "templates/user.php";
+require $template;

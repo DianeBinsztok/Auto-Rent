@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 define("BASE_URL", dirname($_SERVER['SCRIPT_NAME']));
 //Ne garder que la requête: après le nom de domaine et avant la query string (sur une route dynamique)
 define("REQUESTED_URI", str_replace(BASE_URL, '', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)));
@@ -46,7 +45,6 @@ if (array_key_exists(REQUESTED_URI, $routes)) {
         require "src/middlewares/authentification-mw.php";
         authMiddleware();
     }
-
     require $request_uri["controller"];
 
 } else {

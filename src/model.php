@@ -118,6 +118,32 @@ function createNewLocation(array $locationData)
     }
 }
 
+// V - Enregistrer un nouvel utilisateur
+function createNewOwner(array $ownerData)
+{
+    require "env.php";
+    try {
+        $database = new PDO($db . ':host=' . $db_host . ';dbname=' . $db_name . ';charset=' . $db_charset, $db_user, $db_pw);
+
+        $statement = $database->prepare(
+            "INSERT INTO owners (owner_name, owner_email, owner_password)
+            VALUES (:owner_name, :owner_email, :owner_password)"
+        );
+
+        $statement->execute([
+            'owner_name' => $ownerData['owner_name'],
+            'owner_email' => $ownerData['owner_email'],
+            'owner_password' => $ownerData['owner_password'],
+        ]);
+        $newOwnerId = $database->lastInsertId();
+        return $newOwnerId;
+
+    } catch (Exception $e) {
+        echo ("Impossible de créer de compte'");
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
 /*
 // Afficher les données sur un locataire
 function getTenantInfo($tenant_id)
