@@ -98,5 +98,13 @@ function newLocation(array $newLocationData)
     // Convertir les champs 'location_furnished' et 'location_rented' en booléens avant insertion en base de données
     $newLocationData['location_furnished'] = isset($newLocationData['location_furnished']) ? 1 : 0;
     $newLocationData['location_rented'] = isset($newLocationData['location_rented']) ? 1 : 0;
-    createNewLocation($newLocationData);
+
+    //Convertir les champs "location_surface" et "location_nb_of_rooms" en int
+    $newLocationData['location_surface'] = intval($newLocationData['location_surface'], 10);
+    $newLocationData['location_nb_of_rooms'] = intval($newLocationData['location_nb_of_rooms'], 10);
+
+    $newLocationId = createNewLocation($newLocationData);
+    if ($newLocationId) {
+        $_SESSION["message"] = "Votre logement a été ajouté avec succès";
+    }
 }

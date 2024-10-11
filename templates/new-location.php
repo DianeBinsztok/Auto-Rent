@@ -1,22 +1,11 @@
 <?php require "partials/header.php"; ?>
 
 <h1>Enregistrer un bien</h1>
+<?php if (isset($_SESSION["message"])) {
+    echo "<p id='message'>" . $_SESSION["message"] . "</p>";
+    unset($_SESSION['message']);
+} ?>
 <form method="post" action=<?php echo BASE_URL . "/dashboard/new-location" ?>>
-    <?
-    //libellé - texte
-    // Adresse : 
-    // n de voie - texte
-    // type de voie - menu déroulant
-    // nom de voie - texte
-    // code postal - texte
-    // ville- texte
-    // nb de pièces - nb
-    // surface habitable en m2 - nb
-    // classe énergétique - menu déroulant
-    // meublé - bool
-    // Loué ou pas - bool
-    // si loué : nom et email du-des locataire.s - texte
-    ?>
     <label for="location_label">Libellé du logement: </label>
     <input type="text" name="location_label" placeholder="Ex: T5 rue Victor Hugo" />
     <section class="add-location-section" id="adress-container">
@@ -57,8 +46,8 @@
         <p>m²</p>
         <label for="location_nb_of_rooms">Nombre de pièces: </label>
         <input type="number" name="location_nb_of_rooms" />
-        <label for="location_energy_class">Classe énergétique: </label>
-        <select name="location_energy_class">
+        <label for="location_energy_score">Classe énergétique: </label>
+        <select name="location_energy_score">
             <option value="a">A</option>
             <option value="b">B</option>
             <option value="c">C</option>
@@ -79,6 +68,7 @@
         <input type="hidden" name="location_owner_id" value=<?= $_SESSION["owner_id"] ?>>
     </section>
     <section class="add-location-section" id="tenant-info-container">
+        <!-- Conditionner l'affichage de cette partie à la valeur de location_rented, avec un script JS-->
         <h2>Information sur les locataires</h2>
         <label for="name">Nom du/des locataire.s: </label>
         <input type="text" name="location_tenant-name">

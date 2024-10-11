@@ -88,8 +88,8 @@ function createNewLocation(array $locationData)
         $database = new PDO($db . ':host=' . $db_host . ';dbname=' . $db_name . ';charset=' . $db_charset, $db_user, $db_pw);
 
         $statement = $database->prepare(
-            "INSERT INTO locations (location_label, location_street_number, location_street_type, location_street_name, location_additional_adress_info, location_postal_code, location_city, location_surface, location_nb_of_rooms, location_energy_class, location_furnished, location_rent, location_rented, location_fk_owner_id)
-            VALUES (:location_label, :location_street_number, :location_street_type, :location_street_name, :location_additional_adress_info, :location_postal_code, :location_city, :location_surface, :location_nb_of_rooms, :location_energy_class, :location_furnished, :location_rent, :location_rented, :location_owner_id)"
+            "INSERT INTO locations (location_label, location_street_number, location_street_type, location_street_name, location_additional_adress_info, location_postal_code, location_city, location_surface, location_nb_of_rooms, location_energy_score, location_furnished, location_rent, location_rented, location_fk_owner_id)
+            VALUES (:location_label, :location_street_number, :location_street_type, :location_street_name, :location_additional_adress_info, :location_postal_code, :location_city, :location_surface, :location_nb_of_rooms, :location_energy_score, :location_furnished, :location_rent, :location_rented, :location_owner_id)"
         );
 
         $statement->execute([
@@ -102,7 +102,7 @@ function createNewLocation(array $locationData)
             'location_city' => $locationData['location_city'],
             'location_surface' => $locationData['location_surface'],
             'location_nb_of_rooms' => $locationData['location_nb_of_rooms'],
-            'location_energy_class' => $locationData['location_energy_class'],
+            'location_energy_score' => $locationData['location_energy_score'],
             'location_furnished' => $locationData['location_furnished'],
             'location_rent' => $locationData['location_rent'],
             'location_rented' => $locationData['location_rented'],
