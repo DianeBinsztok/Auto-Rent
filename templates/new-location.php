@@ -2,7 +2,7 @@
 
 <h1>Enregistrer un bien</h1>
 <?php if (isset($_SESSION["message"])) {
-    echo "<p id='message'>" . $_SESSION["message"] . "</p>";
+    echo "<p id='$_SESSION[message_color_code]'>" . $_SESSION["message"] . "</p>";
     unset($_SESSION['message']);
 } ?>
 <form method="post" action=<?php echo BASE_URL . "/dashboard/new-location" ?>>

@@ -20,6 +20,7 @@ switch ($template) {
             require $template;
             break;
         } else {
+            $_SESSION["message_color_code"] = "warning";
             $_SESSION["message"] = "Une erreur est survenue : aucun identifiant de logement n'a été détecté";
             header("Location:" . BASE_URL . "/dashboard");
         }
@@ -61,6 +62,8 @@ function locationBelongsToUser($location_id)
         }
         return false;
     } else {
+        $_SESSION["message_color_code"] = "warning";
+        $_SESSION["message"] = "Vous devez être connecté.e pour accéder à cette page";
         header("Location:/login");
     }
 }
@@ -71,6 +74,7 @@ function getDetailsOnRequiredLocation($location_id)
         $location = getOneLocationDetail($_GET["location"]);
         return $location;
     } else {
+        $_SESSION["message_color_code"] = "warning";
         $_SESSION["message"] = "Vous ne pouvez pas accéder à ce logement";
         header("Location:" . BASE_URL . "/dashboard");
     }
@@ -105,6 +109,7 @@ function newLocation(array $newLocationData)
 
     $newLocationId = createNewLocation($newLocationData);
     if ($newLocationId) {
+        $_SESSION["message_color_code"] = "ok";
         $_SESSION["message"] = "Votre logement a été ajouté avec succès";
     }
 }

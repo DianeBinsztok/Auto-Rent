@@ -1,7 +1,7 @@
 <?php
 require $template;
 require_once "src/model.php";
-require "session-controller.php";
+require_once "session-controller.php";
 
 // SI LE FORMULAIRE EST ENVOYÉ: VÉRIFIER LES INFORMATIONS AVANT DE CRÉER L'UTILISTEUR
 if ($_POST) {
@@ -23,16 +23,19 @@ if ($_POST) {
             $_SESSION = createSession($newOwnerId, $newOwnerData["owner_email"]);
 
             if ($_SESSION) {
+                $_SESSION["message_color_code"] = "ok";
                 $_SESSION["message"] = "Bienvenue sur votre dashboard!";
                 header("Location:" . BASE_URL . "/dashboard");
                 exit;
             } else {
+                $_SESSION["message_color_code"] = "warning";
                 $_SESSION["message"] = "Une erreur est survenue, la session utilisateur n'a pas pu être créée";
                 header("Location:" . BASE_URL . "/register");
                 exit;
             }
 
         } else {
+            $_SESSION["message_color_code"] = "warning";
             $_SESSION["message"] = "Une erreur est survenue, votre compte n'a pas pu être créé";
             header("Location:" . BASE_URL . "/register");
             exit;
@@ -41,6 +44,7 @@ if ($_POST) {
     }
     // Sinon : afficher les erreurs
     else {
+        $_SESSION["message_color_code"] = "warning";
         $_SESSION["message"] = "<p>Votre compte n'a pas pu être créé :</p><ul>";
 
         foreach ($errors as $error) {

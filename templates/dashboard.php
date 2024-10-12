@@ -4,7 +4,7 @@ require "partials/header.php";
 
 <h1>Tableau de bord</h1>
 <?php if (isset($_SESSION["message"])) {
-    echo "<p id='message'>" . $_SESSION["message"] . "</p>";
+    echo "<p id='$_SESSION[message_color_code]'>" . $_SESSION["message"] . "</p>";
     unset($_SESSION['message']);
 } ?>
 
